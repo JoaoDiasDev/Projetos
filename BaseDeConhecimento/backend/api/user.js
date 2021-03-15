@@ -20,7 +20,7 @@ module.exports = (app) => {
       existsOrError(user.email, "E-mail não informado");
       existsOrError(user.password, "Senha não informada");
       existsOrError(user.confirmPassword, "Confirmação de Senha inválida");
-      existsOrError(user.password, user.confirmPassword, "Senhas não conferem");
+      equalsOrError(user.password, user.confirmPassword, "Senhas não conferem");
 
       const userFromDB = await app
         .db("users")
@@ -33,7 +33,7 @@ module.exports = (app) => {
       return res.status(400).send(msg);
     }
 
-    user.password = encryptPassword(req.body.password);
+    user.password = encryptPassword(user.password);
     delete user.confirmPassword;
 
     if (user.id) {

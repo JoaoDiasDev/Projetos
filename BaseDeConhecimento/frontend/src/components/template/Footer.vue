@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <span>Copyright <strong>JoaoDias</strong> ©2021</span>
+    <span>Copyright <strong>JoaoDias</strong> © 2021</span>
   </footer>
 </template>
 

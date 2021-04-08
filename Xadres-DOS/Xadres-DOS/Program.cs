@@ -45,7 +45,8 @@ namespace Xadres_DOS
                     }
                 }
 
-                Tela.ImprimirTabuleiro(partida.tab);
+                Console.Clear();
+                Tela.ImprimirPartida(partida);
             }
             catch(TabuleiroException e)
             {

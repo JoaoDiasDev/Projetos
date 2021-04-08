@@ -18,7 +18,19 @@ namespace Xadres_DOS
             ImprimirPecasCapturadas(partida);
             Console.WriteLine();
             Console.WriteLine("Turno: " + partida.turno);
-            Console.WriteLine("Aguardando jogada: " + partida.jogadorAtual);
+            if (!partida.terminada)
+            {
+                Console.WriteLine("Aguardando jogada: " + partida.jogadorAtual);
+                if (partida.xeque)
+                {
+                    Console.WriteLine("XEQUE!");
+                }
+            }
+            else
+            {
+                Console.WriteLine("XEQUEMATE!");
+                Console.WriteLine("Vencedor: " + partida.jogadorAtual);
+            }
         }
 
         public static void ImprimirPecasCapturadas(PartidaDeXadrez partida)
@@ -34,7 +46,8 @@ namespace Xadres_DOS
             Console.ForegroundColor = aux;
         }
 
-        public static void ImprimirConjunto(HashSet<Peca> conjunto) {
+        public static void ImprimirConjunto(HashSet<Peca> conjunto)
+        {
             Console.Write("[");
             foreach (Peca x in conjunto)
             {
@@ -84,10 +97,15 @@ namespace Xadres_DOS
 
         public static PosicaoXadrez lerPosicaoXadrez()
         {
+
+
             string s = Console.ReadLine();
             char coluna = s[0];
             int linha = int.Parse(s[1] + "");
             return new PosicaoXadrez(coluna, linha);
+
+
+
         }
         public static void ImprimirPeca(Peca peca)
         {

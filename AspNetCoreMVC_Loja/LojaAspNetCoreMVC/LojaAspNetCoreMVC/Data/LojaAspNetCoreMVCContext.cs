@@ -5,13 +5,20 @@ namespace LojaAspNetCoreMVC.Data
 {
     public class LojaAspNetCoreMVCContext : DbContext
     {
+        public DbSet<Department>? Department { get; set; }
+        public DbSet<Seller>? Seller { get; set; }
+        public DbSet<SalesRecord>? SalesRecord { get; set; }
+
+
         public LojaAspNetCoreMVCContext(DbContextOptions<LojaAspNetCoreMVCContext> options)
             : base(options)
         {
         }
 
-        public DbSet<Department> Department { get; set; }
-        public DbSet<Seller> Employee { get; set; }
-        public DbSet<SalesRecord> SalesRecords { get; set; }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
     }
 }

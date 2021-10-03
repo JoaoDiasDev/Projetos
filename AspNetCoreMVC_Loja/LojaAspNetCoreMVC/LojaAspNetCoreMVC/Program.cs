@@ -10,6 +10,7 @@ string connectionString = builder.Configuration.GetConnectionString("LojaAspNetC
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<LojaAspNetCoreMVCContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 builder.Services.AddTransient<SeedingService>();
+builder.Services.AddScoped<SeedingService>();
 builder.Services.AddScoped<SellerService>();
 
 var app = builder.Build();

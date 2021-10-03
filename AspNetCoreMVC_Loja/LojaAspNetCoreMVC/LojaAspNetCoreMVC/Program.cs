@@ -12,6 +12,7 @@ builder.Services.AddDbContext<LojaAspNetCoreMVCContext>(options => options.UseMy
 builder.Services.AddTransient<SeedingService>();
 builder.Services.AddScoped<SeedingService>();
 builder.Services.AddScoped<SellerService>();
+builder.Services.AddScoped<DepartmentService>();
 
 var app = builder.Build();
 

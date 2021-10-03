@@ -12,15 +12,11 @@ builder.Services.AddTransient<SeedingService>();
 
 var app = builder.Build();
 
-
-
-
-
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
+
     //Seed Data
     void SeedData(IHost app)
     {

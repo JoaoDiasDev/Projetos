@@ -17,9 +17,13 @@ namespace LojaAspNetCoreMVC.Data
         public void Seed()
         {
             _context.Database.EnsureCreated();
-            if (!_context.Department.Any() ||
-                !_context.Seller.Any() ||
-                !_context.SalesRecord.Any())
+            if (_context.Department.Any() ||
+                _context.Seller.Any() ||
+                _context.SalesRecord.Any())
+            {
+                return;
+            }
+            else
             {
                 Department d1 = new Department(1, "Computers");
                 Department d2 = new Department(2, "Electronics");

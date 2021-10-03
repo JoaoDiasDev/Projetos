@@ -1,4 +1,4 @@
-﻿using LojaAspNetCoreMVC.Models;
+﻿using LojaAspNetCoreMVC.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

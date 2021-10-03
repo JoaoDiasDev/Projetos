@@ -1,15 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using LojaAspNetCoreMVC.Data;
+﻿using LojaAspNetCoreMVC.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<LojaAspNetCoreMVCContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("LojaAspNetCoreMVCContext")));
+string connectionString = builder.Configuration.GetConnectionString("LojaAspNetCoreMVCContext");
+
+builder.Services.AddDbContext<LojaAspNetCoreMVCContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

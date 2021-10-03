@@ -14,6 +14,6 @@ namespace LojaAspNetCoreMVC.Data
         {
         }
 
-        public DbSet<LojaAspNetCoreMVC.Models.Department> Department { get; set; }
+        public DbSet<Department> Department { get; set; }
     }
 }

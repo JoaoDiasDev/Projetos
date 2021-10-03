@@ -18,6 +18,15 @@ namespace LojaAspNetCoreMVC.Controllers
             return View();
         }
 
+        public IActionResult About()
+        {
+            ViewData["Message"] = "Your application description page.";
+            ViewData["Professor"] = "Joao Dias";
+            ViewData["Email"] = "joaodiasworking@gmail.com";
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             return View();

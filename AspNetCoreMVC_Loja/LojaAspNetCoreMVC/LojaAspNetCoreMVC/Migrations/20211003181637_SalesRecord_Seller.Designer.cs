@@ -3,14 +3,16 @@ using System;
 using LojaAspNetCoreMVC.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LojaAspNetCoreMVC.Migrations
 {
     [DbContext(typeof(LojaAspNetCoreMVCContext))]
-    partial class LojaAspNetCoreMVCContextModelSnapshot : ModelSnapshot
+    [Migration("20211003181637_SalesRecord_Seller")]
+    partial class SalesRecord_Seller
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

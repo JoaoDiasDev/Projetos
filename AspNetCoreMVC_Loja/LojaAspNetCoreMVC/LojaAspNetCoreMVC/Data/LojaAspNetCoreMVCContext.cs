@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using LojaAspNetCoreMVC.Models;
 using Microsoft.EntityFrameworkCore;
-using LojaAspNetCoreMVC.Models;
 
 namespace LojaAspNetCoreMVC.Data
 {
     public class LojaAspNetCoreMVCContext : DbContext
     {
-        public LojaAspNetCoreMVCContext (DbContextOptions<LojaAspNetCoreMVCContext> options)
+        public LojaAspNetCoreMVCContext(DbContextOptions<LojaAspNetCoreMVCContext> options)
             : base(options)
         {
         }
 
         public DbSet<Department> Department { get; set; }
+        public DbSet<Seller> Employee { get; set; }
+        public DbSet<SalesRecord> SalesRecords { get; set; }
     }
 }

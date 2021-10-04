@@ -1,6 +1,8 @@
 ﻿using LojaAspNetCoreMVC.Data;
 using LojaAspNetCoreMVC.Services;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +17,16 @@ builder.Services.AddScoped<SellerService>();
 builder.Services.AddScoped<DepartmentService>();
 
 var app = builder.Build();
+
+var ptBR = new CultureInfo("pt-BR");
+var localizationOption = new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture(ptBR),
+    SupportedCultures = new List<CultureInfo> { ptBR },
+    SupportedUICultures = new List<CultureInfo> { ptBR }
+};
+
+app.UseRequestLocalization(localizationOption);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

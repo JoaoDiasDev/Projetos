@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 using Api.Domain.Entities;
 
 namespace Api.Domain.Interfaces
@@ -12,5 +13,6 @@ namespace Api.Domain.Interfaces
         Task<bool> DeleteAsync(Guid id);
         Task<T> SelectAsync(Guid id);
         Task<IEnumerable<T>> SelectAsync();
+        Task<bool> ExistAsync(Guid id);
     }
 }

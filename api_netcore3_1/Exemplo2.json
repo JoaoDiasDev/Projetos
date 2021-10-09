@@ -1,0 +1,22 @@
+{
+    "nome": "Menu Nome",
+    "sobrenome": "Aqui SobreNome",
+    "idade": 25,
+    "endereco": {
+        "endereco": "Rua Teste, 21",
+        "cidade": "Limeira",
+        "estado": "SP",
+        "pais": "Brasil",
+        "cep": 13480180
+    },
+    "telefone": [
+        {
+            "tipo": "fixo",
+            "numero": "19 3030-3030"
+        },
+        {
+            "tipo": "celular",
+            "numero": "19 98123-4567"
+        }
+    ]
+}

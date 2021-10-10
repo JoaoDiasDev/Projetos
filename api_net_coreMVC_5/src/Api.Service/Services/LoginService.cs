@@ -15,7 +15,7 @@ namespace Api.Service.Services
 {
     public class LoginService : ILoginService
     {
-        private IUserRepository _repository;
+        private readonly IUserRepository _repository;
         public SigningConfigurations _signingConfigurations;
         public TokenConfigurations _tokenConfigurations;
         private IConfiguration _configuration { get; }
@@ -47,7 +47,7 @@ namespace Api.Service.Services
                 }
                 else
                 {
-                    ClaimsIdentity identity = new ClaimsIdentity(
+                    ClaimsIdentity identity = new(
                         new GenericIdentity(user.Email),
                         new[]
                         {
@@ -55,7 +55,6 @@ namespace Api.Service.Services
                             new Claim(JwtRegisteredClaimNames.UniqueName, user.Email),
                         }
                     );
-
                     DateTime createDate = DateTime.UtcNow;
                     DateTime expirationDate = createDate + TimeSpan.FromSeconds(_tokenConfigurations.Seconds);
 
@@ -90,7 +89,7 @@ namespace Api.Service.Services
             var token = handler.WriteToken(securityToken);
             return token;
         }
-        private object SuccessObject(DateTime createDate, DateTime expirationDate, string token, UserEntity user)
+        private static object SuccessObject(DateTime createDate, DateTime expirationDate, string token, UserEntity user)
         {
             return new
             {

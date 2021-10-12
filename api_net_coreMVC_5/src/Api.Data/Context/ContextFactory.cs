@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using System;
 
 namespace Api.Data.Context
 {
@@ -8,9 +9,17 @@ namespace Api.Data.Context
         public Mycontext CreateDbContext(string[] args)
         {
             //Usado para Criar as Migrações
-            var connectionString = "Server=localhost;Port=3306;Database=dbAPI;Uid=developer;Pwd=123456";
             var optionsBuilder = new DbContextOptionsBuilder<Mycontext>();
-            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+
+            if (Environment.GetEnvironmentVariable("DATABASE").ToLower() == "SQLSERVER".ToLower())
+            {
+
+                optionsBuilder.UseSqlServer(Environment.GetEnvironmentVariable("DB_CONNECTION"));
+            }
+            else
+            {
+                optionsBuilder.UseMySql(Environment.GetEnvironmentVariable("DB_CONNECTION"), ServerVersion.AutoDetect(Environment.GetEnvironmentVariable("DB_CONNECTION")));
+            }
             return new Mycontext(optionsBuilder.Options);
         }
     }

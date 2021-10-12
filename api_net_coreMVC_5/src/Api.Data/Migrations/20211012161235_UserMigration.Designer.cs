@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(Mycontext))]
-    [Migration("20211009191400_FirstMigrationUser")]
-    partial class FirstMigrationUser
+    [Migration("20211012161235_UserMigration")]
+    partial class UserMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,6 +46,16 @@ namespace Data.Migrations
                         .IsUnique();
 
                     b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("315246c7-35a3-4204-a2db-b3b41c1917ac"),
+                            CreateAt = new DateTime(2021, 10, 12, 13, 12, 35, 549, DateTimeKind.Local).AddTicks(1220),
+                            Email = "joaodiasworking@gmail.com",
+                            Name = "Administrator",
+                            UpdateAt = new DateTime(2021, 10, 12, 13, 12, 35, 549, DateTimeKind.Local).AddTicks(2526)
+                        });
                 });
 #pragma warning restore 612, 618
         }

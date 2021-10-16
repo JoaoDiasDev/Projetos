@@ -15,9 +15,12 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "DB_CONNECTION": "Server=localhost;Port=3306;Database=dbapi;Uid=developer;Pwd=123456",
+        "AUDIENCE": "JoaoDiasDev",
         "DATABASE": "MYSQL",
-        "MIGRATION": "APLICAR"
+        "DB_CONNECTION": "Persist Security Info=True;Server=localhost;Port=3306;Database=dbapi;Uid=developer;Pwd=123456",
+        "ISSUER": "joaodiasworking@gmail.com",
+        "MIGRATION": "APLICAR",
+        "SECONDS": "1800"
       }
     },
     "application": {

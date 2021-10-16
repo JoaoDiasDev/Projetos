@@ -29,7 +29,7 @@ namespace Api.Application.Test.Usuario.QuandoRequisitarGetAll
                         Email = Faker.Internet.Email(),
                         CreateAt = DateTime.UtcNow
                     },
-                      new UserDto
+                    new UserDto
                     {
                         Id = Guid.NewGuid(),
                         Name = Faker.Name.FullName(),

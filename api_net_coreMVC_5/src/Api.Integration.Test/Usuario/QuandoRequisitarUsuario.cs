@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -18,7 +20,7 @@ namespace Api.Integration.Test.Usuario
         public async Task E_Possivel_Realizar_Crud_Usuario()
         {
             await AdicionarToken();
-            _name = Faker.Name.FullName();
+            _name = Faker.Name.First();
             _email = Faker.Internet.Email();
 
             var userDto = new UserDtoCreate()
@@ -44,7 +46,23 @@ namespace Api.Integration.Test.Usuario
             var listaFromJson = JsonConvert.DeserializeObject<IEnumerable<UserDto>>(jsonResult);
             Assert.NotNull(listaFromJson);
             Assert.True(listaFromJson.Count() > 0);
-            Assert.True(listaFromJson.Count(r => r.Id == registroPost.Id) == 1);
+            Assert.True(listaFromJson.Where(r => r.Id == registroPost.Id).Count() == 1);
+
+            var updateUserDto = new UserDtoUpdate()
+            {
+                Id = registroPost.Id,
+                Name = Faker.Name.FullName(),
+                Email = Faker.Internet.Email()
+            };
+
+            var stringContent = new StringContent(JsonConvert.SerializeObject(updateUserDto), Encoding.UTF8, "application/json");
+            response = await client.PutAsync($"{hostApi}users", stringContent);
+            jsonResult = await response.Content.ReadAsStringAsync();
+            var registroAtualizado = JsonConvert.DeserializeObject<UserDtoUpdateResult>(jsonResult);
+
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            Assert.NotEqual(registroPost.Name, registroAtualizado.Name);
+            Assert.NotEqual(registroPost.Email, registroAtualizado.Email);
         }
     }
 }

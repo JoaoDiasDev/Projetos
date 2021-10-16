@@ -24,11 +24,10 @@ namespace Api.Data.Context
                     Id = Guid.NewGuid(),
                     Name = "Administrator",
                     Email = "joaodiasworking@gmail.com",
-                    CreateAt = DateTime.Now,
-                    UpdateAt = DateTime.Now,
+                    CreateAt = DateTime.UtcNow,
+                    UpdateAt = DateTime.UtcNow,
                 }
             );
         }
-
     }
 }

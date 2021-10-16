@@ -17,7 +17,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "AUDIENCE": "JoaoDiasDev",
         "DATABASE": "MYSQL",
-        "DB_CONNECTION": "Persist Security Info=True;Server=localhost;Port=3306;Database=dbapi;Uid=developer;Pwd=123456",
+        "DB_CONNECTION": "Persist Security Info=True;Server=localhost;Port=3306;Database=dbapi;Uid=developer;Pwd=123456;SslMode=none;",
         "ISSUER": "joaodiasworking@gmail.com",
         "MIGRATION": "APLICAR",
         "SECONDS": "1800"
@@ -30,7 +30,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development",
         "AUDIENCE": "JoaoDiasDev",
         "DATABASE": "MYSQL",
-        "DB_CONNECTION": "Persist Security Info=True;Server=localhost;Port=3306;Database=dbapi;Uid=developer;Pwd=123456",
+        "DB_CONNECTION": "Persist Security Info=True;Server=localhost;Port=3306;Database=dbapi;Uid=developer;Pwd=123456;SslMode=none;",
         "ISSUER": "joaodiasworking@gmail.com",
         "MIGRATION": "APLICAR",
         "SECONDS": "1800"

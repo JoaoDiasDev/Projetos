@@ -48,6 +48,7 @@ namespace Api.Integration.Test.Usuario
             Assert.True(listaFromJson.Count() > 0);
             Assert.True(listaFromJson.Where(r => r.Id == registroPost.Id).Count() == 1);
 
+            //PUT
             var updateUserDto = new UserDtoUpdate()
             {
                 Id = registroPost.Id,
@@ -63,6 +64,23 @@ namespace Api.Integration.Test.Usuario
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
             Assert.NotEqual(registroPost.Name, registroAtualizado.Name);
             Assert.NotEqual(registroPost.Email, registroAtualizado.Email);
+
+            //GET ID
+            response = await client.GetAsync($"{hostApi}users/{registroAtualizado.Id}");
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            jsonResult = await response.Content.ReadAsStringAsync();
+            var registroSelecionado = JsonConvert.DeserializeObject<UserDto>(jsonResult);
+            Assert.NotNull(registroSelecionado);
+            Assert.Equal(registroSelecionado.Name, registroSelecionado.Name);
+            Assert.Equal(registroSelecionado.Email, registroSelecionado.Email);
+
+            //DELETE
+            response = await client.DeleteAsync($"{hostApi}users/{registroSelecionado.Id}");
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            //GET ID depois do Delete
+            response = await client.GetAsync($"{hostApi}users/{registroSelecionado.Id}");
+            Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
         }
     }
 }

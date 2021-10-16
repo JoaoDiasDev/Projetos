@@ -91,8 +91,8 @@ namespace Api.Service.Services
             return new
             {
                 authenticated = true,
-                created = createDate.ToString("dd-MM-yyyy HH:mm:ss"),
-                expiration = expirationDate.ToString("dd-MM-yyyy HH:mm:ss"),
+                created = createDate.ToString("yyyy-MM-dd HH:mm:ss"),
+                expiration = expirationDate.ToString("yyyy-MM-dd HH:mm:ss"),
                 accessToken = token,
                 userName = user.Email,
                 name = user.Name,

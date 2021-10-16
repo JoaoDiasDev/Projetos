@@ -24,7 +24,7 @@ namespace Api.Integration.Test
 
         public BaseIntegration()
         {
-            this.hostApi = "http://localhost:8787/api/";
+            this.hostApi = "http://localhost:5000/api/";
             var builder = new WebHostBuilder().UseEnvironment("Testing")
                 .UseStartup<Startup>();
             var server = new TestServer(builder);

@@ -14,7 +14,7 @@ namespace Api.Integration.Test
         [JsonProperty("expiration")]
         public DateTime expiration { get; set; }
 
-        [JsonProperty("acessToken")]
+        [JsonProperty("accessToken")]
         public string accessToken { get; set; }
 
         [JsonProperty("userName")]

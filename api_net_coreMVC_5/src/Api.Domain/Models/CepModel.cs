@@ -2,7 +2,7 @@
 
 namespace Domain.Models
 {
-    public class CepModel
+    public class CepModel : BaseModel
     {
         private string _cep;
 
@@ -30,7 +30,7 @@ namespace Domain.Models
 
         private Guid _municipioId;
 
-        public Guid Municipio
+        public Guid MunicipioId
         {
             get { return _municipioId; }
             set { _municipioId = value; }

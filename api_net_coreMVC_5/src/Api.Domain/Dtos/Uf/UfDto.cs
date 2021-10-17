@@ -6,6 +6,6 @@ namespace Domain.Dtos.Uf
     {
         public Guid Id { get; set; }
         public string Sigla { get; set; }
-        public string Name { get; set; }
+        public string Nome { get; set; }
     }
 }

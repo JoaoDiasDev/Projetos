@@ -9,6 +9,6 @@ namespace Domain.Dtos.Cep
         public string Logradouro { get; set; }
         public string Numero { get; set; }
         public Guid MunicipioId { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public DateTime CreateAt { get; set; }
     }
 }

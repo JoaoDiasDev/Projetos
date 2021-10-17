@@ -63,14 +63,14 @@ namespace Api.Data.Test
                 Assert.Equal(_registroAtualizado.Nome, _registroSelecionado.Nome);
                 Assert.Equal(_registroAtualizado.CodIBGE, _registroSelecionado.CodIBGE);
                 Assert.Equal(_registroAtualizado.UfId, _registroSelecionado.UfId);
-                Assert.Null(_registroSelecionado.Uf);
+                Assert.NotNull(_registroSelecionado.Uf);
 
                 _registroSelecionado = await _repositorio.GetCompleteById(_registroAtualizado.Id);
                 Assert.NotNull(_registroSelecionado);
                 Assert.Equal(_registroAtualizado.Nome, _registroSelecionado.Nome);
                 Assert.Equal(_registroAtualizado.CodIBGE, _registroSelecionado.CodIBGE);
                 Assert.Equal(_registroAtualizado.UfId, _registroSelecionado.UfId);
-                Assert.Null(_registroSelecionado.Uf);
+                Assert.NotNull(_registroSelecionado.Uf);
 
                 var _todosRegistros = await _repositorio.SelectAsync();
                 Assert.NotNull(_todosRegistros);

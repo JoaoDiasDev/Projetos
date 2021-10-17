@@ -31,7 +31,6 @@ namespace Api.Integration.Test
 
             myContext = server.Host.Services.GetService(typeof(Mycontext)) as Mycontext;
             myContext.Database.Migrate();
-            myContext.Database.EnsureCreated();
 
 
 

@@ -1,9 +1,10 @@
-using Api.Data.Context;
 using Api.Domain.Interfaces.Services.User;
 using Api.Service.Services;
-using Microsoft.EntityFrameworkCore;
+using Domain.Interfaces.Services.Cep;
+using Domain.Interfaces.Services.Municipio;
+using Domain.Interfaces.Services.Uf;
 using Microsoft.Extensions.DependencyInjection;
-using System;
+using Service.Services;
 
 namespace Api.CrossCutting.DependencyInjection
 {
@@ -13,19 +14,9 @@ namespace Api.CrossCutting.DependencyInjection
         {
             serviceCollection.AddTransient<IUserService, UserService>();
             serviceCollection.AddTransient<ILoginService, LoginService>();
-
-            if (Environment.GetEnvironmentVariable("DATABASE").ToLower() == "SQLSERVER".ToLower())
-            {
-                serviceCollection.AddDbContext<Mycontext>(
-                options => options.UseSqlServer(Environment.GetEnvironmentVariable("DATABASE")));
-            }
-            else
-            {
-                var dbVersion = ServerVersion.AutoDetect(Environment.GetEnvironmentVariable("DB_CONNECTION"));
-
-                serviceCollection.AddDbContext<Mycontext>(
-                options => options.UseMySql(Environment.GetEnvironmentVariable("DB_CONNECTION"), ServerVersion.AutoDetect(Environment.GetEnvironmentVariable("DB_CONNECTION"))));
-            }
+            serviceCollection.AddTransient<IUfService, UfService>();
+            serviceCollection.AddTransient<IMunicipioService, MunicipioService>();
+            serviceCollection.AddTransient<ICepService, CepService>();
         }
     }
 }

@@ -93,7 +93,7 @@ namespace Application.Controllers
         [Authorize("Bearer")]
         [HttpGet]
         [Route("{codigoIBGE}")]
-        public async Task<IActionResult> GetCompleteByIBGE(Guid codigoIBGE)
+        public async Task<IActionResult> GetCompleteByIBGE(int codigoIBGE)
         {
             if (!ModelState.IsValid)
             {
@@ -102,7 +102,8 @@ namespace Application.Controllers
 
             try
             {
-                var result = await _service.Get(codigoIBGE);
+                var result = await _service.GetCompleteByIBGE(codigoIBGE);
+
                 if (result == null)
                 {
                     return NotFound();
@@ -168,6 +169,25 @@ namespace Application.Controllers
             catch (ArgumentException e)
             {
 
+                return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
+            }
+        }
+
+        [Authorize("Bearer")]
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            try
+            {
+                return Ok(await _service.Delete(id));
+            }
+            catch (ArgumentException e)
+            {
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
         }

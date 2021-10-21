@@ -28,7 +28,13 @@ namespace Application.Controllers
 
             try
             {
-                return BadRequest(ModelState);
+                var result = await _service.GetAll();
+                if (result == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok(result);
             }
             catch (ArgumentException e)
             {

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
+using System;
 
 namespace Api.Data.Context
 {
@@ -12,7 +13,7 @@ namespace Api.Data.Context
 
             var optionsBuilder = new DbContextOptionsBuilder<Mycontext>();
 
-            optionsBuilder.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+            optionsBuilder.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 21)));
             //optionsBuilder.UseMySql(Environment.GetEnvironmentVariable("DB_CONNECTION"), ServerVersion.AutoDetect(Environment.GetEnvironmentVariable("DB_CONNECTION")));
 
             return new Mycontext(optionsBuilder.Options);

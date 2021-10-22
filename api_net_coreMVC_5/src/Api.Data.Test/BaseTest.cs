@@ -20,10 +20,9 @@ namespace Api.Data.Test
 
         public DbTeste()
         {
-            var mysqlVersion = MySqlServerVersion.LatestSupportedServerVersion;
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddDbContext<Mycontext>(o =>
-            o.UseMySql($"Persist Security Info=True;Server=localhost;Database={_dataBaseName};User=developer;Password=123456", mysqlVersion),
+            o.UseMySql($"Persist Security Info=True;Server=localhost;Database={_dataBaseName};User=developer;Password=123456", new MySqlServerVersion(new Version(8, 0, 21))),
             ServiceLifetime.Transient
             );
 

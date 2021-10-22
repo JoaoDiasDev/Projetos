@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:51545",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "launchUrl": "swagger",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AUDIENCE": "JoaoDiasDev",
+        "DATABASE": "MYSQL",
+        "DB_CONNECTION": "Persist Security Info=True;Server=localhost;Port=3306;Database=dbapi;Uid=developer;Pwd=123456;SslMode=none;",
+        "ISSUER": "joaodiasworking@gmail.com",
+        "MIGRATION": "APLICAR",
+        "SECONDS": "1800"
+      }
+    },
+    "application": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "AUDIENCE": "JoaoDiasDev",
+        "DATABASE": "MYSQL",
+        "DB_CONNECTION": "Persist Security Info=True;Server=localhost;Port=3306;Database=dbapi;Uid=developer;Pwd=123456;SslMode=none;",
+        "ISSUER": "joaodiasworking@gmail.com",
+        "MIGRATION": "APLICAR",
+        "SECONDS": "1800"
+      },
+      "applicationUrl": "http://localhost:5000",
+      "dotnetRunMessages": "true"
+    }
+  }
+}

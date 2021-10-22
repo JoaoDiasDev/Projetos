@@ -1,7 +1,7 @@
-﻿using Domain.Dtos.Municipio;
 using System;
+using Api.Domain.Dtos.Municipio;
 
-namespace Domain.Dtos.Cep
+namespace Api.Domain.Dtos.Cep
 {
     public class CepDto
     {

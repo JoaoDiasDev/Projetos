@@ -1,19 +1,20 @@
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Api.Domain.Dtos.User;
 using Api.Domain.Entities;
 using Api.Domain.Interfaces;
 using Api.Domain.Interfaces.Services.User;
 using Api.Domain.Models;
 using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Api.Service.Services
 {
     public class UserService : IUserService
     {
-        private readonly IRepository<UserEntity> _repository;
+        private IRepository<UserEntity> _repository;
         private readonly IMapper _mapper;
+
         public UserService(IRepository<UserEntity> repository, IMapper mapper)
         {
             _repository = repository;
@@ -42,6 +43,7 @@ namespace Api.Service.Services
             var model = _mapper.Map<UserModel>(user);
             var entity = _mapper.Map<UserEntity>(model);
             var result = await _repository.InsertAsync(entity);
+
             return _mapper.Map<UserDtoCreateResult>(result);
         }
 
@@ -49,6 +51,7 @@ namespace Api.Service.Services
         {
             var model = _mapper.Map<UserModel>(user);
             var entity = _mapper.Map<UserEntity>(model);
+
             var result = await _repository.UpdateAsync(entity);
             return _mapper.Map<UserDtoUpdateResult>(result);
         }

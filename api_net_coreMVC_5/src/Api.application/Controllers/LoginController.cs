@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Api.Domain.Dtos;
@@ -11,13 +9,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Api.Application.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
+    [ApiController]
     public class LoginController : ControllerBase
     {
         [AllowAnonymous]
         [HttpPost]
-        public async Task<object> Login([FromBody] LoginDto loginDto, [FromServices] ILoginService service)
+        public async Task<object> Login([FromBody] LoginDto loginDto,
+                                        [FromServices] ILoginService service)
         {
             if (!ModelState.IsValid)
             {
@@ -25,7 +24,7 @@ namespace Api.Application.Controllers
             }
             if (loginDto == null)
             {
-                return BadRequest();
+                return BadRequest(ModelState);
             }
 
             try
@@ -33,7 +32,7 @@ namespace Api.Application.Controllers
                 var result = await service.FindByLogin(loginDto);
                 if (result != null)
                 {
-                    return Ok(result);
+                    return result;
                 }
                 else
                 {
@@ -42,9 +41,9 @@ namespace Api.Application.Controllers
             }
             catch (ArgumentException e)
             {
-
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
         }
+
     }
 }

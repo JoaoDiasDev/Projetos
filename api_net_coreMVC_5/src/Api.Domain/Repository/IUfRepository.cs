@@ -1,7 +1,7 @@
-﻿using Api.Domain.Interfaces;
-using Domain.Entities;
+using Api.Domain.Entities;
+using Api.Domain.Interfaces;
 
-namespace Domain.Repository
+namespace Api.Domain.Repository
 {
     public interface IUfRepository : IRepository<UfEntity>
     {

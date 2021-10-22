@@ -1,8 +1,8 @@
-﻿using Domain.Entities;
+using Api.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Data.Mapping
+namespace Api.Data.Mapping
 {
     public class UfMap : IEntityTypeConfiguration<UfEntity>
     {
@@ -12,7 +12,9 @@ namespace Data.Mapping
 
             builder.HasKey(u => u.Id);
 
-            builder.HasIndex(u => u.Sigla).IsUnique();
+            builder.HasIndex(u => u.Sigla)
+                   .IsUnique();
+
         }
     }
 }

@@ -1,12 +1,12 @@
-﻿using AutoMapper;
-using Domain.Dtos.Uf;
-using Domain.Interfaces.Services.Uf;
-using Domain.Repository;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Api.Domain.Dtos.Uf;
+using Api.Domain.Interfaces.Services.Uf;
+using Api.Domain.Repository;
+using AutoMapper;
 
-namespace Service.Services
+namespace Api.Service.Services
 {
     public class UfService : IUfService
     {

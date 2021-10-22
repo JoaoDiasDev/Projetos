@@ -1,9 +1,9 @@
-﻿using Domain.Dtos.Municipio;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Api.Domain.Dtos.Municipio;
 
-namespace Domain.Interfaces.Services.Municipio
+namespace Api.Domain.Interfaces.Services.Municipio
 {
     public interface IMunicipioService
     {

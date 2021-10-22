@@ -1,7 +1,8 @@
-using Api.Service.Test.Municipio;
-using Domain.Interfaces.Services.Cep;
-using Moq;
 using System.Threading.Tasks;
+using Api.Domain.Interfaces.Services.Cep;
+using Api.Domain.Interfaces.Services.Municipio;
+using Api.Service.Test.Municipio;
+using Moq;
 using Xunit;
 
 namespace Api.Service.Test.Cep

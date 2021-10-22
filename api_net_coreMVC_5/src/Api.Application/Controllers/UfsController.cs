@@ -1,15 +1,15 @@
-﻿using Domain.Interfaces.Services.Uf;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
 using System.Threading.Tasks;
+using Api.Domain.Interfaces.Services.Uf;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Application.Controllers
+namespace Api.Application.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UfsController : Controller
+    public class UfsController : ControllerBase
     {
         public IUfService _service { get; set; }
         public UfsController(IUfService service)
@@ -19,7 +19,7 @@ namespace Application.Controllers
 
         [Authorize("Bearer")]
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult> GetAll()
         {
             if (!ModelState.IsValid)
             {
@@ -28,17 +28,10 @@ namespace Application.Controllers
 
             try
             {
-                var result = await _service.GetAll();
-                if (result == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(result);
+                return Ok(await _service.GetAll());
             }
             catch (ArgumentException e)
             {
-
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
         }
@@ -46,7 +39,7 @@ namespace Application.Controllers
         [Authorize("Bearer")]
         [HttpGet]
         [Route("{id}")]
-        public async Task<IActionResult> Get(Guid id)
+        public async Task<ActionResult> Get(Guid id)
         {
             if (!ModelState.IsValid)
             {
@@ -65,9 +58,9 @@ namespace Application.Controllers
             }
             catch (ArgumentException e)
             {
-
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
         }
+
     }
 }

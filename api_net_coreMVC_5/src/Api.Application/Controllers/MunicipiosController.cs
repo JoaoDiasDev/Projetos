@@ -1,18 +1,18 @@
-﻿using Domain.Dtos.Municipio;
-using Domain.Interfaces.Services.Municipio;
+using Api.Domain.Dtos.Municipio;
+using Api.Domain.Interfaces.Services.Municipio;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace Application.Controllers
+namespace Api.Application.Controllers
 {
     [Route("api/[controller]")]
-    public class MunicipiosController : Controller
+    [ApiController]
+    public class MunicipiosController : ControllerBase
     {
         public IMunicipioService _service { get; set; }
-
         public MunicipiosController(IMunicipioService service)
         {
             _service = service;
@@ -20,7 +20,7 @@ namespace Application.Controllers
 
         [Authorize("Bearer")]
         [HttpGet]
-        public async Task<IActionResult> GetAll()
+        public async Task<ActionResult> GetAll()
         {
             if (!ModelState.IsValid)
             {
@@ -40,7 +40,7 @@ namespace Application.Controllers
         [Authorize("Bearer")]
         [HttpGet]
         [Route("{id}", Name = "GetMunicipioWithId")]
-        public async Task<IActionResult> Get(Guid id)
+        public async Task<ActionResult> Get(Guid id)
         {
             if (!ModelState.IsValid)
             {
@@ -54,19 +54,19 @@ namespace Application.Controllers
                 {
                     return NotFound();
                 }
+
                 return Ok(result);
             }
             catch (ArgumentException e)
             {
-
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
         }
 
         [Authorize("Bearer")]
         [HttpGet]
-        [Route("{idMunicipio}")]
-        public async Task<IActionResult> GetCompleteById(Guid idMunicipio)
+        [Route("Complete/{id}")]
+        public async Task<ActionResult> GetCompleteById(Guid id)
         {
             if (!ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace Application.Controllers
 
             try
             {
-                var result = await _service.GetCompleteById(idMunicipio);
+                var result = await _service.GetCompleteById(id);
                 if (result == null)
                 {
                     return NotFound();
@@ -85,15 +85,14 @@ namespace Application.Controllers
             }
             catch (ArgumentException e)
             {
-
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
         }
 
         [Authorize("Bearer")]
         [HttpGet]
-        [Route("{codigoIBGE}")]
-        public async Task<IActionResult> GetCompleteByIBGE(int codigoIBGE)
+        [Route("byIBGE/{codigoIBGE}")]
+        public async Task<ActionResult> GetCompleteByIBGE(int codigoIBGE)
         {
             if (!ModelState.IsValid)
             {
@@ -103,23 +102,22 @@ namespace Application.Controllers
             try
             {
                 var result = await _service.GetCompleteByIBGE(codigoIBGE);
-
                 if (result == null)
                 {
                     return NotFound();
                 }
+
                 return Ok(result);
             }
             catch (ArgumentException e)
             {
-
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
         }
 
         [Authorize("Bearer")]
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody] MunicipioDtoCreate dtoCreate)
+        public async Task<ActionResult> Post([FromBody] MunicipioDtoCreate dtoCreate)
         {
             if (!ModelState.IsValid)
             {
@@ -131,7 +129,7 @@ namespace Application.Controllers
                 var result = await _service.Post(dtoCreate);
                 if (result != null)
                 {
-                    return Created(new Uri(Url.Link("GetMunicipioWhitId", new { id = result.Id })), result);
+                    return Created(new Uri(Url.Link("GetMunicipioWithId", new { id = result.Id })), result);
                 }
                 else
                 {
@@ -140,15 +138,15 @@ namespace Application.Controllers
             }
             catch (ArgumentException e)
             {
-
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
         }
 
         [Authorize("Bearer")]
         [HttpPut]
-        public async Task<IActionResult> Put([FromBody] MunicipioDtoUpdate dtoUpdate)
+        public async Task<ActionResult> Put([FromBody] MunicipioDtoUpdate dtoUpdate)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -168,9 +166,9 @@ namespace Application.Controllers
             }
             catch (ArgumentException e)
             {
-
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
+
         }
 
         [Authorize("Bearer")]
@@ -181,7 +179,6 @@ namespace Application.Controllers
             {
                 return BadRequest(ModelState);
             }
-
             try
             {
                 return Ok(await _service.Delete(id));
@@ -191,5 +188,7 @@ namespace Application.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, e.Message);
             }
         }
+
+
     }
 }

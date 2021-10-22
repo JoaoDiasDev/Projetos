@@ -1,16 +1,16 @@
-﻿using Domain.Dtos.Uf;
-using Domain.Entities;
-using Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Api.Domain.Dtos.Uf;
+using Api.Domain.Entities;
+using Api.Domain.Models;
 using Xunit;
 
 namespace Api.Service.Test.AutoMapper
 {
     public class UfMapper : BaseTesteService
     {
-        [Fact(DisplayName = "É Possível mapear os modelos de Uf")]
+        [Fact(DisplayName = "É Possível Mapear os Modelos de Uf")]
         public void E_Possivel_Mapear_os_Modelos_Uf()
         {
             var model = new UfModel
@@ -38,17 +38,17 @@ namespace Api.Service.Test.AutoMapper
 
             //Model => Entity
             var entity = Mapper.Map<UfEntity>(model);
+            Assert.Equal(entity.Id, model.Id);
             Assert.Equal(entity.Nome, model.Nome);
             Assert.Equal(entity.Sigla, model.Sigla);
             Assert.Equal(entity.CreateAt, model.CreateAt);
             Assert.Equal(entity.UpdateAt, model.UpdateAt);
-            Assert.Equal(entity.Nome, entity.Nome);
 
-            //Entity => Dto
-            var ufDto = Mapper.Map<UfDto>(entity);
-            Assert.Equal(ufDto.Id, entity.Id);
-            Assert.Equal(ufDto.Nome, entity.Nome);
-            Assert.Equal(ufDto.Sigla, entity.Sigla);
+            //Entity para Dto
+            var userDto = Mapper.Map<UfDto>(entity);
+            Assert.Equal(userDto.Id, entity.Id);
+            Assert.Equal(userDto.Nome, entity.Nome);
+            Assert.Equal(userDto.Sigla, entity.Sigla);
 
             var listaDto = Mapper.Map<List<UfDto>>(listaEntity);
             Assert.True(listaDto.Count() == listaEntity.Count());
@@ -59,11 +59,11 @@ namespace Api.Service.Test.AutoMapper
                 Assert.Equal(listaDto[i].Sigla, listaEntity[i].Sigla);
             }
 
-            //Dto => Model
-            var ufModel = Mapper.Map<UfDto>(model);
-            Assert.Equal(ufModel.Id, model.Id);
-            Assert.Equal(ufModel.Nome, model.Nome);
-            Assert.Equal(ufModel.Sigla, model.Sigla);
+            //Dto para Model
+            var userModel = Mapper.Map<UfDto>(model);
+            Assert.Equal(userModel.Id, model.Id);
+            Assert.Equal(userModel.Nome, model.Nome);
+            Assert.Equal(userModel.Sigla, model.Sigla);
 
         }
     }

@@ -1,6 +1,6 @@
-﻿using Domain.Dtos.Uf;
 using System;
 using System.Collections.Generic;
+using Api.Domain.Dtos.Uf;
 
 namespace Api.Service.Test.Uf
 {
@@ -11,7 +11,6 @@ namespace Api.Service.Test.Uf
         public static Guid IdUf { get; set; }
 
         public List<UfDto> listaUfDto = new List<UfDto>();
-
         public UfDto ufDto;
 
         public UfTestes()
@@ -25,8 +24,8 @@ namespace Api.Service.Test.Uf
                 var dto = new UfDto()
                 {
                     Id = Guid.NewGuid(),
-                    Nome = Faker.Address.UsState(),
-                    Sigla = Faker.Address.UsState().Substring(1, 3)
+                    Sigla = Faker.Address.UsState().Substring(1, 3),
+                    Nome = Faker.Address.UsState()
                 };
                 listaUfDto.Add(dto);
             };
@@ -34,9 +33,10 @@ namespace Api.Service.Test.Uf
             ufDto = new UfDto
             {
                 Id = IdUf,
-                Nome = Nome,
-                Sigla = Sigla
+                Sigla = Sigla,
+                Nome = Nome
             };
         }
+
     }
 }

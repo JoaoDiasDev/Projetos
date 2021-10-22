@@ -1,16 +1,17 @@
-﻿using Api.Data.Context;
+using System.Linq;
+using Api.Data.Context;
 using Api.Data.Repository;
-using Domain.Entities;
-using Domain.Repository;
+using Api.Domain.Entities;
+using Api.Domain.Repository;
 using Microsoft.EntityFrameworkCore;
 
-namespace Data.Implementations
+namespace Api.Data.Implementations
 {
     public class UfImplementation : BaseRepository<UfEntity>, IUfRepository
     {
         private DbSet<UfEntity> _dataset;
 
-        public UfImplementation(Mycontext context) : base(context)
+        public UfImplementation(MyContext context) : base(context)
         {
             _dataset = context.Set<UfEntity>();
         }

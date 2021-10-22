@@ -1,9 +1,9 @@
-using Application.Controllers;
-using Domain.Interfaces.Services.Cep;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
 using System;
 using System.Threading.Tasks;
+using Api.Application.Controllers;
+using Api.Domain.Interfaces.Services.Cep;
+using Microsoft.AspNetCore.Mvc;
+using Moq;
 using Xunit;
 
 namespace Api.Application.Test.Cep.QuandoRequisitarDelete

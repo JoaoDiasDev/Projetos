@@ -1,10 +1,9 @@
-using Domain.Models;
+using System;
 
 namespace Api.Domain.Models
 {
     public class UserModel : BaseModel
     {
-
         private string _name;
         public string Name
         {
@@ -18,5 +17,6 @@ namespace Api.Domain.Models
             get { return _email; }
             set { _email = value; }
         }
+
     }
 }

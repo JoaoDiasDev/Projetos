@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace Domain.Dtos.Municipio
+namespace Api.Domain.Dtos.Municipio
 {
     public class MunicipioDtoCreateResult
     {

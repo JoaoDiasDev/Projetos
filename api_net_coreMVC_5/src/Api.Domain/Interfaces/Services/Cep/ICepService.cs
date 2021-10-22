@@ -1,8 +1,8 @@
-﻿using Domain.Dtos.Cep;
 using System;
 using System.Threading.Tasks;
+using Api.Domain.Dtos.Cep;
 
-namespace Domain.Interfaces.Services.Cep
+namespace Api.Domain.Interfaces.Services.Cep
 {
     public interface ICepService
     {

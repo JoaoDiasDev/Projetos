@@ -1,35 +1,36 @@
-﻿using Api.Domain.Interfaces.Services.User;
-using Moq;
 using System.Threading.Tasks;
+using Api.Domain.Interfaces.Services.User;
+using Moq;
 using Xunit;
 
 namespace Api.Service.Test.Usuario
 {
     public class QuandoForExecutadoUpdate : UsuarioTestes
     {
-        private IUserService _userService;
-        private Mock<IUserService> _userServiceMock;
+        private IUserService _service;
+        private Mock<IUserService> _serviceMock;
 
         [Fact(DisplayName = "É Possivel executar o Método Update.")]
         public async Task E_Possivel_Executar_Metodo_Update()
         {
-            _userServiceMock = new Mock<IUserService>();
-            _userServiceMock.Setup(m => m.Post(userDtoCreate)).ReturnsAsync(userDtoCreateResult);
-            _userService = _userServiceMock.Object;
+            _serviceMock = new Mock<IUserService>();
+            _serviceMock.Setup(m => m.Post(userDtoCreate)).ReturnsAsync(userDtoCreateResult);
+            _service = _serviceMock.Object;
 
-            var result = await _userService.Post(userDtoCreate);
+            var result = await _service.Post(userDtoCreate);
             Assert.NotNull(result);
             Assert.Equal(NomeUsuario, result.Name);
             Assert.Equal(EmailUsuario, result.Email);
 
-            _userServiceMock = new Mock<IUserService>();
-            _userServiceMock.Setup(m => m.Put(userDtoUpdate)).ReturnsAsync(userDtoUpdateResult);
-            _userService = _userServiceMock.Object;
+            _serviceMock = new Mock<IUserService>();
+            _serviceMock.Setup(m => m.Put(userDtoUpdate)).ReturnsAsync(userDtoUpdateResult);
+            _service = _serviceMock.Object;
 
-            var resultUpdate = await _userService.Put(userDtoUpdate);
+            var resultUpdate = await _service.Put(userDtoUpdate);
             Assert.NotNull(resultUpdate);
             Assert.Equal(NomeUsuarioAlterado, resultUpdate.Name);
             Assert.Equal(EmailUsuarioAlterado, resultUpdate.Email);
+
         }
     }
 }

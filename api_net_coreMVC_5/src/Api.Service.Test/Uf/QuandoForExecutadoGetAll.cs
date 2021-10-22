@@ -1,9 +1,10 @@
-﻿using Domain.Dtos.Uf;
-using Domain.Interfaces.Services.Uf;
-using Moq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Domain.Dtos.Uf;
+using Api.Domain.Interfaces.Services.Uf;
+using Moq;
 using Xunit;
 
 namespace Api.Service.Test.Uf
@@ -13,7 +14,7 @@ namespace Api.Service.Test.Uf
         private IUfService _service;
         private Mock<IUfService> _serviceMock;
 
-        [Fact(DisplayName = "É possível executar o método GETALL.")]
+        [Fact(DisplayName = "É Possivel Executar o Método GETAll.")]
         public async Task E_Possivel_Executar_Metodo_GetAll()
         {
             _serviceMock = new Mock<IUfService>();
@@ -33,6 +34,7 @@ namespace Api.Service.Test.Uf
             var _resultEmpty = await _service.GetAll();
             Assert.Empty(_resultEmpty);
             Assert.True(_resultEmpty.Count() == 0);
+
         }
     }
 }

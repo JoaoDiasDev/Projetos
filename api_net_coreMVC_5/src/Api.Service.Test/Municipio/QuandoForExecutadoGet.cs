@@ -1,8 +1,8 @@
-﻿using Domain.Dtos.Municipio;
-using Domain.Interfaces.Services.Municipio;
-using Moq;
 using System;
 using System.Threading.Tasks;
+using Api.Domain.Dtos.Municipio;
+using Api.Domain.Interfaces.Services.Municipio;
+using Moq;
 using Xunit;
 
 namespace Api.Service.Test.Municipio
@@ -12,7 +12,7 @@ namespace Api.Service.Test.Municipio
         private IMunicipioService _service;
         private Mock<IMunicipioService> _serviceMock;
 
-        [Fact(DisplayName = "É possivel executar o método Get.")]
+        [Fact(DisplayName = "É Possivel Executar o Método GET.")]
         public async Task E_Possivel_Executar_Metodo_Get()
         {
             _serviceMock = new Mock<IMunicipioService>();

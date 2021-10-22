@@ -1,8 +1,8 @@
-using Domain.Dtos.Cep;
-using Domain.Dtos.Municipio;
-using Domain.Dtos.Uf;
 using System;
 using System.Collections.Generic;
+using Api.Domain.Dtos.Cep;
+using Api.Domain.Dtos.Municipio;
+using Api.Domain.Dtos.Uf;
 
 namespace Api.Service.Test.Municipio
 {

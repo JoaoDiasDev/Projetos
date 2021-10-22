@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace Domain.Models
+namespace Api.Domain.Models
 {
     public class BaseModel
     {
@@ -11,8 +11,8 @@ namespace Domain.Models
             set { _id = value; }
         }
 
-        private DateTime? _createAt;
-        public DateTime? CreateAt
+        private DateTime _createAt;
+        public DateTime CreateAt
         {
             get { return _createAt; }
             set

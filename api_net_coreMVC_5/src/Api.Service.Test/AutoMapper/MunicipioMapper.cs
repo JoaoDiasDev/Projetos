@@ -1,16 +1,16 @@
-﻿using Domain.Dtos.Municipio;
-using Domain.Entities;
-using Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Api.Domain.Dtos.Municipio;
+using Api.Domain.Entities;
+using Api.Domain.Models;
 using Xunit;
 
 namespace Api.Service.Test.AutoMapper
 {
     public class MunicipioMapper : BaseTesteService
     {
-        [Fact(DisplayName = "É Possível mapear os modelos de Município")]
+        [Fact(DisplayName = "É Possível Mapear os Modelo de Municipio")]
         public void E_Possivel_Mapear_os_Modelos_Municipio()
         {
             var model = new MunicipioModel
@@ -30,7 +30,7 @@ namespace Api.Service.Test.AutoMapper
                 {
                     Id = Guid.NewGuid(),
                     Nome = Faker.Address.City(),
-                    CodIBGE = Faker.RandomNumber.Next(10000000, 99999999),
+                    CodIBGE = Faker.RandomNumber.Next(1, 10000),
                     UfId = Guid.NewGuid(),
                     CreateAt = DateTime.UtcNow,
                     UpdateAt = DateTime.UtcNow,
@@ -53,19 +53,19 @@ namespace Api.Service.Test.AutoMapper
             Assert.Equal(entity.CreateAt, model.CreateAt);
             Assert.Equal(entity.UpdateAt, model.UpdateAt);
 
-            //Entity => Dto
-            var municipioDto = Mapper.Map<MunicipioDto>(entity);
-            Assert.Equal(municipioDto.Id, entity.Id);
-            Assert.Equal(municipioDto.Nome, entity.Nome);
-            Assert.Equal(municipioDto.CodIBGE, entity.CodIBGE);
-            Assert.Equal(municipioDto.UfId, entity.UfId);
+            //Entity para Dto
+            var userDto = Mapper.Map<MunicipioDto>(entity);
+            Assert.Equal(userDto.Id, entity.Id);
+            Assert.Equal(userDto.Nome, entity.Nome);
+            Assert.Equal(userDto.CodIBGE, entity.CodIBGE);
+            Assert.Equal(userDto.UfId, entity.UfId);
 
-            var municipioDtoCompleto = Mapper.Map<MunicipioDtoCompleto>(listaEntity.FirstOrDefault());
-            Assert.Equal(municipioDtoCompleto.Id, listaEntity.FirstOrDefault().Id);
-            Assert.Equal(municipioDtoCompleto.Nome, listaEntity.FirstOrDefault().Nome);
-            Assert.Equal(municipioDtoCompleto.CodIBGE, listaEntity.FirstOrDefault().CodIBGE);
-            Assert.Equal(municipioDtoCompleto.UfId, listaEntity.FirstOrDefault().UfId);
-            Assert.NotNull(municipioDtoCompleto.Uf);
+            var userDtoCompleto = Mapper.Map<MunicipioDtoCompleto>(listaEntity.FirstOrDefault());
+            Assert.Equal(userDtoCompleto.Id, listaEntity.FirstOrDefault().Id);
+            Assert.Equal(userDtoCompleto.Nome, listaEntity.FirstOrDefault().Nome);
+            Assert.Equal(userDtoCompleto.CodIBGE, listaEntity.FirstOrDefault().CodIBGE);
+            Assert.Equal(userDtoCompleto.UfId, listaEntity.FirstOrDefault().UfId);
+            Assert.NotNull(userDtoCompleto.Uf);
 
             var listaDto = Mapper.Map<List<MunicipioDto>>(listaEntity);
             Assert.True(listaDto.Count() == listaEntity.Count());
@@ -77,40 +77,38 @@ namespace Api.Service.Test.AutoMapper
                 Assert.Equal(listaDto[i].UfId, listaEntity[i].UfId);
             }
 
-            var municipioDtoCreateResult = Mapper.Map<MunicipioDtoCreateResult>(entity);
-            Assert.Equal(municipioDtoCreateResult.Id, entity.Id);
-            Assert.Equal(municipioDtoCreateResult.Nome, entity.Nome);
-            Assert.Equal(municipioDtoCreateResult.CodIBGE, entity.CodIBGE);
-            Assert.Equal(municipioDtoCreateResult.UfId, entity.UfId);
-            Assert.Equal(municipioDtoCreateResult.CreateAt, entity.CreateAt);
+            var userDtoCreateResult = Mapper.Map<MunicipioDtoCreateResult>(entity);
+            Assert.Equal(userDtoCreateResult.Id, entity.Id);
+            Assert.Equal(userDtoCreateResult.Nome, entity.Nome);
+            Assert.Equal(userDtoCreateResult.CodIBGE, entity.CodIBGE);
+            Assert.Equal(userDtoCreateResult.UfId, entity.UfId);
+            Assert.Equal(userDtoCreateResult.CreateAt, entity.CreateAt);
 
+            var userDtoUpdateResult = Mapper.Map<MunicipioDtoUpdateResult>(entity);
+            Assert.Equal(userDtoUpdateResult.Id, entity.Id);
+            Assert.Equal(userDtoUpdateResult.Nome, entity.Nome);
+            Assert.Equal(userDtoUpdateResult.CodIBGE, entity.CodIBGE);
+            Assert.Equal(userDtoCreateResult.UfId, entity.UfId);
+            Assert.Equal(userDtoUpdateResult.UpdateAt, entity.UpdateAt);
 
-            var municipioDtoUpdateResult = Mapper.Map<MunicipioDtoUpdateResult>(entity);
-            Assert.Equal(municipioDtoUpdateResult.Id, entity.Id);
-            Assert.Equal(municipioDtoUpdateResult.Nome, entity.Nome);
-            Assert.Equal(municipioDtoUpdateResult.CodIBGE, entity.CodIBGE);
-            Assert.Equal(municipioDtoUpdateResult.UfId, entity.UfId);
-            Assert.Equal(municipioDtoUpdateResult.UpdateAt, entity.UpdateAt);
+            //Dto para Model
+            var userModel = Mapper.Map<MunicipioModel>(userDto);
+            Assert.Equal(userModel.Id, userDto.Id);
+            Assert.Equal(userModel.Nome, userDto.Nome);
+            Assert.Equal(userModel.CodIBGE, userDto.CodIBGE);
+            Assert.Equal(userModel.UfId, userDto.UfId);
 
-            //Dto => Model
-            var municipioModel = Mapper.Map<MunicipioModel>(municipioDto);
-            Assert.Equal(municipioModel.Id, municipioDto.Id);
-            Assert.Equal(municipioModel.Nome, municipioDto.Nome);
-            Assert.Equal(municipioModel.CodIBGE, municipioDto.CodIBGE);
-            Assert.Equal(municipioModel.UfId, municipioDto.UfId);
+            var userDtoCreate = Mapper.Map<MunicipioDtoCreate>(userModel);
+            Assert.Equal(userDtoCreate.Nome, userModel.Nome);
+            Assert.Equal(userDtoCreate.CodIBGE, userModel.CodIBGE);
+            Assert.Equal(userDtoCreate.UfId, userModel.UfId);
 
-            var municipioDtoCreate = Mapper.Map<MunicipioDtoCreate>(municipioModel);
-            Assert.Equal(municipioDtoCreate.Nome, municipioModel.Nome);
-            Assert.Equal(municipioDtoCreate.CodIBGE, municipioModel.CodIBGE);
-            Assert.Equal(municipioDtoCreate.UfId, municipioModel.UfId);
-
-            var municipioDtoUpdate = Mapper.Map<MunicipioDtoUpdate>(municipioModel);
-            Assert.Equal(municipioDtoUpdate.Id, municipioModel.Id);
-            Assert.Equal(municipioDtoUpdate.Nome, municipioModel.Nome);
-            Assert.Equal(municipioDtoUpdate.CodIBGE, municipioModel.CodIBGE);
-            Assert.Equal(municipioDtoUpdate.UfId, municipioModel.UfId);
+            var userDtoUpdate = Mapper.Map<MunicipioDtoUpdate>(userModel);
+            Assert.Equal(userDtoUpdate.Id, userModel.Id);
+            Assert.Equal(userDtoUpdate.Nome, userModel.Nome);
+            Assert.Equal(userDtoUpdate.CodIBGE, userModel.CodIBGE);
+            Assert.Equal(userDtoUpdate.UfId, userModel.UfId);
 
         }
-
     }
 }

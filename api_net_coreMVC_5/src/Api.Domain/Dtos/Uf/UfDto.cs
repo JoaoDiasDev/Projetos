@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace Domain.Dtos.Uf
+namespace Api.Domain.Dtos.Uf
 {
     public class UfDto
     {
@@ -9,3 +9,6 @@ namespace Domain.Dtos.Uf
         public string Nome { get; set; }
     }
 }
+
+
+

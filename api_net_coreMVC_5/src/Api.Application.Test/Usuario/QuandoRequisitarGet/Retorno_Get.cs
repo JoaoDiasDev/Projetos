@@ -1,10 +1,10 @@
-﻿using Api.Application.Controllers;
+using System;
+using System.Threading.Tasks;
+using Api.Application.Controllers;
 using Api.Domain.Dtos.User;
 using Api.Domain.Interfaces.Services.User;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
-using System;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace Api.Application.Test.Usuario.QuandoRequisitarGet
@@ -13,7 +13,7 @@ namespace Api.Application.Test.Usuario.QuandoRequisitarGet
     {
         private UsersController _controller;
 
-        [Fact(DisplayName = "É possível realizar o Get.")]
+        [Fact(DisplayName = "É possível Realizar o Get.")]
         public async Task E_Possivel_Invocar_a_Controller_Get()
         {
             var serviceMock = new Mock<IUserService>();
@@ -21,13 +21,14 @@ namespace Api.Application.Test.Usuario.QuandoRequisitarGet
             var email = Faker.Internet.Email();
 
             serviceMock.Setup(m => m.Get(It.IsAny<Guid>())).ReturnsAsync(
-                new UserDto
-                {
-                    Id = Guid.NewGuid(),
-                    Name = nome,
-                    Email = email,
-                    CreateAt = DateTime.UtcNow
-                });
+                 new UserDto
+                 {
+                     Id = Guid.NewGuid(),
+                     Name = nome,
+                     Email = email,
+                     CreateAt = DateTime.UtcNow
+                 }
+            );
 
             _controller = new UsersController(serviceMock.Object);
             var result = await _controller.Get(Guid.NewGuid());
@@ -36,6 +37,7 @@ namespace Api.Application.Test.Usuario.QuandoRequisitarGet
             Assert.NotNull(resultValue);
             Assert.Equal(nome, resultValue.Name);
             Assert.Equal(email, resultValue.Email);
+
         }
     }
 }

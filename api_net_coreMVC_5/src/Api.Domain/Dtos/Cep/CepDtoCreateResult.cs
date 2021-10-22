@@ -1,6 +1,7 @@
-﻿using System;
+using System;
+using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Dtos.Cep
+namespace Api.Domain.Dtos.Cep
 {
     public class CepDtoCreateResult
     {

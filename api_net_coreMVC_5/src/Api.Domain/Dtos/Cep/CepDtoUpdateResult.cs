@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 
-namespace Domain.Dtos.Cep
+namespace Api.Domain.Dtos.Cep
 {
     public class CepDtoUpdateResult
     {

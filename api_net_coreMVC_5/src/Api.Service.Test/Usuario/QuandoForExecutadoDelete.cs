@@ -1,32 +1,34 @@
-﻿using Api.Domain.Interfaces.Services.User;
-using Moq;
 using System;
 using System.Threading.Tasks;
+using Api.Domain.Interfaces.Services.User;
+using Moq;
 using Xunit;
 
 namespace Api.Service.Test.Usuario
 {
     public class QuandoForExecutadoDelete : UsuarioTestes
     {
-        private IUserService _userService;
-        private Mock<IUserService> _userServiceMock;
-
-        [Fact(DisplayName = "É possivel executar método Delete.")]
+        private IUserService _service;
+        private Mock<IUserService> _serviceMock;
+        [Fact(DisplayName = "É possível executar método Delete.")]
         public async Task E_Possivel_Executar_Metodo_Delete()
         {
-            _userServiceMock = new Mock<IUserService>();
-            _userServiceMock.Setup(m => m.Delete(IdUsuario)).ReturnsAsync(true);
-            _userService = _userServiceMock.Object;
+            _serviceMock = new Mock<IUserService>();
+            _serviceMock.Setup(m => m.Delete(IdUsuario))
+                        .ReturnsAsync(true);
+            _service = _serviceMock.Object;
 
-            var deletado = await _userService.Delete(IdUsuario);
+            var deletado = await _service.Delete(IdUsuario);
             Assert.True(deletado);
 
-            _userServiceMock = new Mock<IUserService>();
-            _userServiceMock.Setup(m => m.Delete(It.IsAny<Guid>())).ReturnsAsync(false);
-            _userService = _userServiceMock.Object;
+            _serviceMock = new Mock<IUserService>();
+            _serviceMock.Setup(m => m.Delete(It.IsAny<Guid>()))
+                        .ReturnsAsync(false);
+            _service = _serviceMock.Object;
 
-            deletado = await _userService.Delete(Guid.NewGuid());
+            deletado = await _service.Delete(Guid.NewGuid());
             Assert.False(deletado);
+
         }
     }
 }

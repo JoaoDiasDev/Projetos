@@ -1,8 +1,8 @@
-﻿using Domain.Dtos.Uf;
-using Domain.Interfaces.Services.Uf;
-using Moq;
 using System;
 using System.Threading.Tasks;
+using Api.Domain.Dtos.Uf;
+using Api.Domain.Interfaces.Services.Uf;
+using Moq;
 using Xunit;
 
 namespace Api.Service.Test.Uf
@@ -12,7 +12,7 @@ namespace Api.Service.Test.Uf
         private IUfService _service;
         private Mock<IUfService> _serviceMock;
 
-        [Fact(DisplayName = "É possível executar o método GET.")]
+        [Fact(DisplayName = "É Possivel Executar o Método GET.")]
         public async Task E_Possivel_Executar_Metodo_Get()
         {
             _serviceMock = new Mock<IUfService>();
@@ -30,6 +30,7 @@ namespace Api.Service.Test.Uf
 
             var _record = await _service.Get(IdUf);
             Assert.Null(_record);
+
         }
     }
 }

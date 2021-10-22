@@ -1,11 +1,10 @@
-﻿using System;
+using System;
 
-namespace Domain.Models
+namespace Api.Domain.Models
 {
     public class MunicipioModel : BaseModel
     {
         private string _nome;
-
         public string Nome
         {
             get { return _nome; }
@@ -13,7 +12,6 @@ namespace Domain.Models
         }
 
         private int _codIBGE;
-
         public int CodIBGE
         {
             get { return _codIBGE; }
@@ -21,12 +19,10 @@ namespace Domain.Models
         }
 
         private Guid _ufId;
-
         public Guid UfId
         {
             get { return _ufId; }
             set { _ufId = value; }
         }
-
     }
 }

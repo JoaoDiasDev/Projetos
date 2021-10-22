@@ -1,33 +1,33 @@
-using Application.Controllers;
-using Domain.Dtos.Cep;
-using Domain.Interfaces.Services.Cep;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
 using System;
 using System.Threading.Tasks;
+using Api.Application.Controllers;
+using Api.Domain.Dtos.Uf;
+using Api.Domain.Interfaces.Services.Uf;
+using Microsoft.AspNetCore.Mvc;
+using Moq;
 using Xunit;
 
-
-namespace Api.Application.Test.Cep.QuandoRequisitarGet
+namespace Api.Application.Test.Uf.QuandoRequisitaraGet
 {
     public class Retorno_OK
     {
-        private CepsController _controller;
+        private UfsController _controller;
 
         [Fact(DisplayName = "É possível Realizar o Get.")]
         public async Task E_Possivel_Invocar_a_Controller_Get()
         {
-            var serviceMock = new Mock<ICepService>();
+            var serviceMock = new Mock<IUfService>();
 
             serviceMock.Setup(m => m.Get(It.IsAny<Guid>())).ReturnsAsync(
-                 new CepDto
+                 new UfDto
                  {
                      Id = Guid.NewGuid(),
-                     Logradouro = "Teste de Rua",
+                     Nome = "São Paulo",
+                     Sigla = "SP"
                  }
             );
 
-            _controller = new CepsController(serviceMock.Object);
+            _controller = new UfsController(serviceMock.Object);
 
             var result = await _controller.Get(Guid.NewGuid());
             Assert.True(result is OkObjectResult);

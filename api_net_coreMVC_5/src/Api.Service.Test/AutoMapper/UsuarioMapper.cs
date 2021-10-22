@@ -1,17 +1,17 @@
-﻿using Api.Domain.Dtos.User;
-using Api.Domain.Entities;
-using Api.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Api.Domain.Dtos.User;
+using Api.Domain.Entities;
+using Api.Domain.Models;
 using Xunit;
 
 namespace Api.Service.Test.AutoMapper
 {
     public class UsuarioMapper : BaseTesteService
     {
-        [Fact(DisplayName = "É Possivel Mappear os Modelos")]
-        public void E_Possivel_Mapear_Os_Modelos()
+        [Fact(DisplayName = "É Possível Mapear os Modelos")]
+        public void E_Possivel_Mapear_os_Modelos()
         {
             var model = new UserModel
             {
@@ -19,11 +19,11 @@ namespace Api.Service.Test.AutoMapper
                 Name = Faker.Name.FullName(),
                 Email = Faker.Internet.Email(),
                 CreateAt = DateTime.UtcNow,
-                UpdateAt = DateTime.UtcNow,
+                UpdateAt = DateTime.UtcNow
             };
 
             var listaEntity = new List<UserEntity>();
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 5; i++)
             {
                 var item = new UserEntity
                 {
@@ -31,7 +31,7 @@ namespace Api.Service.Test.AutoMapper
                     Name = Faker.Name.FullName(),
                     Email = Faker.Internet.Email(),
                     CreateAt = DateTime.UtcNow,
-                    UpdateAt = DateTime.UtcNow,
+                    UpdateAt = DateTime.UtcNow
                 };
                 listaEntity.Add(item);
             }
@@ -44,12 +44,12 @@ namespace Api.Service.Test.AutoMapper
             Assert.Equal(entity.CreateAt, model.CreateAt);
             Assert.Equal(entity.UpdateAt, model.UpdateAt);
 
-            //Entity => Dto
-            var userDto = Mapper.Map<UserDto>(model);
-            Assert.Equal(userDto.Id, model.Id);
-            Assert.Equal(userDto.Name, model.Name);
-            Assert.Equal(userDto.Email, model.Email);
-            Assert.Equal(userDto.CreateAt, model.CreateAt);
+            //Entity para Dto
+            var userDto = Mapper.Map<UserDto>(entity);
+            Assert.Equal(userDto.Id, entity.Id);
+            Assert.Equal(userDto.Name, entity.Name);
+            Assert.Equal(userDto.Email, entity.Email);
+            Assert.Equal(userDto.CreateAt, entity.CreateAt);
 
             var listaDto = Mapper.Map<List<UserDto>>(listaEntity);
             Assert.True(listaDto.Count() == listaEntity.Count());
@@ -73,7 +73,7 @@ namespace Api.Service.Test.AutoMapper
             Assert.Equal(userDtoUpdateResult.Email, entity.Email);
             Assert.Equal(userDtoUpdateResult.UpdateAt, entity.UpdateAt);
 
-            //Dto => Model
+            //Dto para Model
             var userModel = Mapper.Map<UserModel>(userDto);
             Assert.Equal(userModel.Id, userDto.Id);
             Assert.Equal(userModel.Name, userDto.Name);
@@ -85,9 +85,10 @@ namespace Api.Service.Test.AutoMapper
             Assert.Equal(userDtoCreate.Email, userModel.Email);
 
             var userDtoUpdate = Mapper.Map<UserDtoUpdate>(userModel);
-            Assert.Equal(userDtoUpdate.Id, userDto.Id);
+            Assert.Equal(userDtoUpdate.Id, userModel.Id);
             Assert.Equal(userDtoUpdate.Name, userModel.Name);
             Assert.Equal(userDtoUpdate.Email, userModel.Email);
+
         }
     }
 }

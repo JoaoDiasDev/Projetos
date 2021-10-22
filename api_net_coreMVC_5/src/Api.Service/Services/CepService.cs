@@ -1,13 +1,13 @@
-﻿using AutoMapper;
-using Domain.Dtos.Cep;
-using Domain.Entities;
-using Domain.Interfaces.Services.Cep;
-using Domain.Models;
-using Domain.Repository;
 using System;
 using System.Threading.Tasks;
+using Api.Domain.Dtos.Cep;
+using Api.Domain.Entities;
+using Api.Domain.Interfaces.Services.Cep;
+using Api.Domain.Models;
+using Api.Domain.Repository;
+using AutoMapper;
 
-namespace Service.Services
+namespace Api.Service.Services
 {
     public class CepService : ICepService
     {
@@ -18,11 +18,6 @@ namespace Service.Services
         {
             _repository = repository;
             _mapper = mapper;
-        }
-
-        public async Task<bool> Delete(Guid id)
-        {
-            return await _repository.DeleteAsync(id);
         }
 
         public async Task<CepDto> Get(Guid id)
@@ -53,6 +48,11 @@ namespace Service.Services
 
             var result = await _repository.UpdateAsync(entity);
             return _mapper.Map<CepDtoUpdateResult>(result);
+        }
+
+        public async Task<bool> Delete(Guid id)
+        {
+            return await _repository.DeleteAsync(id);
         }
     }
 }

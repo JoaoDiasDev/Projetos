@@ -1,29 +1,31 @@
-﻿using Api.Data.Context;
-using Data.Implementations;
-using Domain.Entities;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Data.Context;
+using Api.Data.Implementations;
+using Api.Domain.Entities;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace Api.Data.Test
 {
     public class MunicipioCrudCompleto : BaseTest, IClassFixture<DbTeste>
     {
-        private IServiceProvider _serviceprovider;
+
+        private ServiceProvider _serviceProvide;
 
         public MunicipioCrudCompleto(DbTeste dbTeste)
         {
-            _serviceprovider = dbTeste.ServiceProvider;
+            _serviceProvide = dbTeste.ServiceProvider;
         }
 
-        [Fact(DisplayName = "CRUD de Município")]
+        [Fact(DisplayName = "CRUD de Municipio")]
         [Trait("CRUD", "MunicipioEntity")]
         public async Task E_Possivel_Realizar_CRUD_Municipio()
         {
-            using (var context = _serviceprovider.GetService<Mycontext>())
+            using (var context = _serviceProvide.GetService<MyContext>())
             {
+
                 MunicipioImplementation _repositorio = new MunicipioImplementation(context);
                 MunicipioEntity _entity = new MunicipioEntity
                 {
@@ -85,6 +87,5 @@ namespace Api.Data.Test
 
             }
         }
-
     }
 }

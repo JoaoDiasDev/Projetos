@@ -1,10 +1,10 @@
-﻿using Application.Controllers;
-using Domain.Dtos.Municipio;
-using Domain.Interfaces.Services.Municipio;
-using Microsoft.AspNetCore.Mvc;
-using Moq;
 using System;
 using System.Threading.Tasks;
+using Api.Application.Controllers;
+using Api.Domain.Dtos.Municipio;
+using Api.Domain.Interfaces.Services.Municipio;
+using Microsoft.AspNetCore.Mvc;
+using Moq;
 using Xunit;
 
 namespace Api.Application.Test.Municipio.QuandoRequisitarCreate
@@ -13,17 +13,18 @@ namespace Api.Application.Test.Municipio.QuandoRequisitarCreate
     {
         private MunicipiosController _controller;
 
-        [Fact(DisplayName = "É possível realizar o created")]
+        [Fact(DisplayName = "É possível Realizar o Created.")]
         public async Task E_Possivel_Invocar_a_Controller_Create()
         {
             var serviceMock = new Mock<IMunicipioService>();
-            serviceMock.Setup(x => x.Post(It.IsAny<MunicipioDtoCreate>())).ReturnsAsync(
+            serviceMock.Setup(m => m.Post(It.IsAny<MunicipioDtoCreate>())).ReturnsAsync(
                 new MunicipioDtoCreateResult
                 {
                     Id = Guid.NewGuid(),
                     Nome = "São Paulo",
-                    CreateAt = DateTime.UtcNow,
-                });
+                    CreateAt = DateTime.UtcNow
+                }
+            );
 
             _controller = new MunicipiosController(serviceMock.Object);
             _controller.ModelState.AddModelError("Nome", "É um Campo Obrigatório");
@@ -40,6 +41,8 @@ namespace Api.Application.Test.Municipio.QuandoRequisitarCreate
 
             var result = await _controller.Post(municipioDtoCreate);
             Assert.True(result is BadRequestObjectResult);
+
         }
+
     }
 }

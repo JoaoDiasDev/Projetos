@@ -1,6 +1,6 @@
-﻿using Api.Domain.Dtos.User;
 using System;
 using System.Collections.Generic;
+using Api.Domain.Dtos.User;
 
 namespace Api.Service.Test.Usuario
 {
@@ -12,7 +12,7 @@ namespace Api.Service.Test.Usuario
         public static string EmailUsuarioAlterado { get; set; }
         public static Guid IdUsuario { get; set; }
 
-        public List<UserDto> listaUserDto = new();
+        public List<UserDto> listaUserDto = new List<UserDto>();
         public UserDto userDto;
         public UserDtoCreate userDtoCreate;
         public UserDtoCreateResult userDtoCreateResult;
@@ -33,7 +33,7 @@ namespace Api.Service.Test.Usuario
                 {
                     Id = Guid.NewGuid(),
                     Name = Faker.Name.FullName(),
-                    Email = Faker.Internet.Email(),
+                    Email = Faker.Internet.Email()
                 };
                 listaUserDto.Add(dto);
             }
@@ -50,6 +50,7 @@ namespace Api.Service.Test.Usuario
                 Name = NomeUsuario,
                 Email = EmailUsuario
             };
+
 
             userDtoCreateResult = new UserDtoCreateResult
             {
@@ -73,6 +74,7 @@ namespace Api.Service.Test.Usuario
                 Email = EmailUsuarioAlterado,
                 UpdateAt = DateTime.UtcNow
             };
+
         }
     }
 }

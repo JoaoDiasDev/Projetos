@@ -1,6 +1,7 @@
 using Api.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using System;
 
 namespace Api.Data.Test
@@ -15,29 +16,34 @@ namespace Api.Data.Test
 
     public class DbTeste : IDisposable
     {
-        private readonly string _dataBaseName = $"dbApiTest_{Guid.NewGuid().ToString().Replace("-", string.Empty)}";
+        private string dataBaseName = $"dbApiTest_{Guid.NewGuid().ToString().Replace("-", string.Empty)}";
         public ServiceProvider ServiceProvider { get; private set; }
 
         public DbTeste()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddDbContext<Mycontext>(o =>
-            o.UseMySql($"Persist Security Info=True;Server=localhost;Database={_dataBaseName};User=developer;Password=123456", new MySqlServerVersion(new Version(8, 0, 21))),
-            ServiceLifetime.Transient
+            serviceCollection.AddDbContext<MyContext>(o =>
+                o.UseMySql($"Persist Security Info=True;Server=localhost;Database={dataBaseName};User=developer;Password=123456",
+                    new MySqlServerVersion(new Version(8, 0, 21)),
+                        mySqlOptions => mySqlOptions
+                            .CharSetBehavior(CharSetBehavior.NeverAppend)),
+                    ServiceLifetime.Transient
             );
 
             ServiceProvider = serviceCollection.BuildServiceProvider();
-            using (var context = ServiceProvider.GetService<Mycontext>())
+            using (var context = ServiceProvider.GetService<MyContext>())
             {
                 context.Database.EnsureCreated();
             }
         }
+
         public void Dispose()
         {
-            using (var context = ServiceProvider.GetService<Mycontext>())
+            using (var context = ServiceProvider.GetService<MyContext>())
             {
                 context.Database.EnsureDeleted();
             }
         }
     }
+
 }

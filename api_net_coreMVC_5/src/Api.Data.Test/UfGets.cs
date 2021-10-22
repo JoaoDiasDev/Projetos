@@ -1,27 +1,28 @@
-﻿using Api.Data.Context;
-using Data.Implementations;
-using Domain.Entities;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Api.Data.Context;
+using Api.Data.Implementations;
+using Api.Domain.Entities;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
 
 namespace Api.Data.Test
 {
     public class UfGets : BaseTest, IClassFixture<DbTeste>
     {
-        private ServiceProvider _serviceProvider;
+        private ServiceProvider _serviceProvide;
+
         public UfGets(DbTeste dbTeste)
         {
-            _serviceProvider = dbTeste.ServiceProvider;
+            _serviceProvide = dbTeste.ServiceProvider;
         }
 
         [Fact(DisplayName = "Gets de UF")]
         [Trait("GETs", "UfEntity")]
         public async Task E_Possivel_Realizar_Gets_UF()
         {
-            using (var context = _serviceProvider.GetService<Mycontext>())
+            using (var context = _serviceProvide.GetService<MyContext>())
             {
                 UfImplementation _repositorio = new UfImplementation(context);
                 UfEntity _entity = new UfEntity
@@ -43,7 +44,11 @@ namespace Api.Data.Test
                 var _todosRegistros = await _repositorio.SelectAsync();
                 Assert.NotNull(_todosRegistros);
                 Assert.True(_todosRegistros.Count() == 27);
+
             }
+
         }
+
+
     }
 }

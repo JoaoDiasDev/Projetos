@@ -1,16 +1,16 @@
-﻿using Api.Domain.Dtos;
-using Api.Domain.Interfaces.Services.User;
-using Moq;
 using System;
 using System.Threading.Tasks;
+using Api.Domain.Dtos;
+using Api.Domain.Interfaces.Services.User;
+using Moq;
 using Xunit;
 
 namespace Api.Service.Test.Login
 {
     public class QuandoForExecutadoFindByLogin
     {
-        private ILoginService _serviceLogin;
-        private Mock<ILoginService> _serviceLoginMock;
+        private ILoginService _service;
+        private Mock<ILoginService> _serviceMock;
 
         [Fact(DisplayName = "É Possivel executar o Método FindByLogin.")]
         public async Task E_Possivel_Executar_Metodo_FindByLogin()
@@ -20,7 +20,7 @@ namespace Api.Service.Test.Login
             {
                 authenticated = true,
                 create = DateTime.UtcNow,
-                expiration = DateTime.UtcNow,
+                expiration = DateTime.UtcNow.AddHours(8),
                 accessToken = Guid.NewGuid(),
                 userName = email,
                 name = Faker.Name.FullName(),
@@ -29,15 +29,16 @@ namespace Api.Service.Test.Login
 
             var loginDto = new LoginDto
             {
-                Email = email,
+                Email = email
             };
 
-            _serviceLoginMock = new Mock<ILoginService>();
-            _serviceLoginMock.Setup(m => m.FindByLogin(loginDto)).ReturnsAsync(objetoRetorno);
-            _serviceLogin = _serviceLoginMock.Object;
+            _serviceMock = new Mock<ILoginService>();
+            _serviceMock.Setup(m => m.FindByLogin(loginDto)).ReturnsAsync(objetoRetorno);
+            _service = _serviceMock.Object;
 
-            var result = await _serviceLogin.FindByLogin(loginDto);
+            var result = await _service.FindByLogin(loginDto);
             Assert.NotNull(result);
+
         }
     }
 }

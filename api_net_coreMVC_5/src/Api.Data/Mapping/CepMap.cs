@@ -1,8 +1,8 @@
-﻿using Domain.Entities;
+using Api.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Data.Mapping
+namespace Api.Data.Mapping
 {
     public class CepMap : IEntityTypeConfiguration<CepEntity>
     {
@@ -10,11 +10,12 @@ namespace Data.Mapping
         {
             builder.ToTable("Cep");
 
-            builder.HasKey(c => c.Id);
+            builder.HasKey(u => u.Id);
 
-            builder.HasIndex(c => c.Cep);
+            builder.HasIndex(u => u.Cep);
 
-            builder.HasOne(c => c.Municipio).WithMany(c => c.Ceps);
+            builder.HasOne(c => c.Municipio)
+                   .WithMany(m => m.Ceps);
         }
     }
 }

@@ -1,10 +1,9 @@
+using Api.Domain.Dtos.Cep;
+using Api.Domain.Dtos.Municipio;
+using Api.Domain.Dtos.Uf;
 using Api.Domain.Dtos.User;
 using Api.Domain.Entities;
 using AutoMapper;
-using Domain.Dtos.Cep;
-using Domain.Dtos.Municipio;
-using Domain.Dtos.Uf;
-using Domain.Entities;
 
 namespace Api.CrossCutting.Mappings
 {
@@ -12,27 +11,39 @@ namespace Api.CrossCutting.Mappings
     {
         public EntityToDtoProfile()
         {
-            CreateMap<UserDto, UserEntity>().ReverseMap();
+            CreateMap<UserDto, UserEntity>()
+               .ReverseMap();
 
-            CreateMap<UserDtoCreateResult, UserEntity>().ReverseMap();
+            CreateMap<UserDtoCreateResult, UserEntity>()
+               .ReverseMap();
 
-            CreateMap<UserDtoUpdateResult, UserEntity>().ReverseMap();
+            CreateMap<UserDtoUpdateResult, UserEntity>()
+               .ReverseMap();
 
-            CreateMap<UfDto, UfEntity>().ReverseMap();
+            CreateMap<UfDto, UfEntity>()
+               .ReverseMap();
 
-            CreateMap<MunicipioDto, MunicipioEntity>().ReverseMap();
+            CreateMap<MunicipioDto, MunicipioEntity>()
+               .ReverseMap();
 
-            CreateMap<MunicipioDtoCompleto, MunicipioEntity>().ReverseMap();
+            CreateMap<MunicipioDtoCompleto, MunicipioEntity>()
+               .ReverseMap();
 
-            CreateMap<MunicipioDtoCreateResult, MunicipioEntity>().ReverseMap();
+            CreateMap<MunicipioDtoCreateResult, MunicipioEntity>()
+               .ReverseMap();
 
-            CreateMap<MunicipioDtoUpdateResult, MunicipioEntity>().ReverseMap();
+            CreateMap<MunicipioDtoUpdateResult, MunicipioEntity>()
+               .ReverseMap();
 
-            CreateMap<CepDto, CepEntity>().ReverseMap();
+            CreateMap<CepDto, CepEntity>()
+               .ReverseMap();
 
-            CreateMap<CepDtoCreateResult, CepEntity>().ReverseMap();
+            CreateMap<CepDtoCreateResult, CepEntity>()
+               .ReverseMap();
 
-            CreateMap<CepDtoUpdateResult, CepEntity>().ReverseMap();
+            CreateMap<CepDtoUpdateResult, CepEntity>()
+               .ReverseMap();
+
         }
     }
 }

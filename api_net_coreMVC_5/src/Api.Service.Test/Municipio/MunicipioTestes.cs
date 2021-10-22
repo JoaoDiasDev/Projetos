@@ -1,7 +1,7 @@
-﻿using Domain.Dtos.Municipio;
-using Domain.Dtos.Uf;
 using System;
 using System.Collections.Generic;
+using Api.Domain.Dtos.Municipio;
+using Api.Domain.Dtos.Uf;
 
 namespace Api.Service.Test.Municipio
 {
@@ -25,9 +25,9 @@ namespace Api.Service.Test.Municipio
         public MunicipioTestes()
         {
             IdMunicipio = Guid.NewGuid();
-            NomeMunicipio = Faker.Address.StreetAddress();
+            NomeMunicipio = Faker.Address.StreetName();
             CodigoIBGEMunicipio = Faker.RandomNumber.Next(1, 10000);
-            NomeMunicipioAlterado = Faker.Address.StreetAddress();
+            NomeMunicipioAlterado = Faker.Address.StreetName();
             CodigoIBGEMunicipioAlterado = Faker.RandomNumber.Next(1, 10000);
             IdUf = Guid.NewGuid();
 
@@ -38,7 +38,7 @@ namespace Api.Service.Test.Municipio
                     Id = Guid.NewGuid(),
                     Nome = Faker.Name.FullName(),
                     CodIBGE = Faker.RandomNumber.Next(1, 10000),
-                    UfId = Guid.NewGuid(),
+                    UfId = Guid.NewGuid()
                 };
                 listaDto.Add(dto);
             }
@@ -47,8 +47,8 @@ namespace Api.Service.Test.Municipio
             {
                 Id = IdMunicipio,
                 Nome = NomeMunicipio,
-                UfId = IdUf,
-                CodIBGE = CodigoIBGEMunicipio
+                CodIBGE = CodigoIBGEMunicipio,
+                UfId = IdUf
             };
 
             municipioDtoCompleto = new MunicipioDtoCompleto
@@ -61,43 +61,43 @@ namespace Api.Service.Test.Municipio
                 {
                     Id = Guid.NewGuid(),
                     Nome = Faker.Address.UsState(),
-                    Sigla = Faker.Address.UsState().Substring(1, 3),
+                    Sigla = Faker.Address.UsState().Substring(1, 3)
                 }
             };
 
             municipioDtoCreate = new MunicipioDtoCreate
             {
                 Nome = NomeMunicipio,
-                UfId = IdUf,
-                CodIBGE = CodigoIBGEMunicipio
+                CodIBGE = CodigoIBGEMunicipio,
+                UfId = IdUf
             };
 
             municipioDtoCreateResult = new MunicipioDtoCreateResult
             {
                 Id = IdMunicipio,
-                UfId = IdUf,
                 Nome = NomeMunicipio,
                 CodIBGE = CodigoIBGEMunicipio,
+                UfId = IdUf,
                 CreateAt = DateTime.UtcNow
             };
 
             municipioDtoUpdate = new MunicipioDtoUpdate
             {
                 Id = IdMunicipio,
-                UfId = IdUf,
                 Nome = NomeMunicipioAlterado,
-                CodIBGE = CodigoIBGEMunicipioAlterado
+                CodIBGE = CodigoIBGEMunicipioAlterado,
+                UfId = IdUf
             };
 
             municipioDtoUpdateResult = new MunicipioDtoUpdateResult
             {
-                CodIBGE = CodigoIBGEMunicipioAlterado,
-                Nome = NomeMunicipioAlterado,
                 Id = IdMunicipio,
+                Nome = NomeMunicipioAlterado,
+                CodIBGE = CodigoIBGEMunicipioAlterado,
                 UfId = IdUf,
                 UpdateAt = DateTime.UtcNow
             };
-        }
 
+        }
     }
 }

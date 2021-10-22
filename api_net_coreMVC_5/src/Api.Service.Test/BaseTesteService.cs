@@ -1,6 +1,7 @@
+using System;
 using Api.CrossCutting.Mappings;
 using AutoMapper;
-using System;
+using Xunit;
 
 namespace Api.Service.Test
 {
@@ -14,7 +15,6 @@ namespace Api.Service.Test
 
         public class AutoMapperFixture : IDisposable
         {
-
             public IMapper GetMapper()
             {
                 var config = new MapperConfiguration(cfg =>
@@ -28,7 +28,6 @@ namespace Api.Service.Test
             }
             public void Dispose()
             {
-                throw new NotImplementedException();
             }
         }
     }

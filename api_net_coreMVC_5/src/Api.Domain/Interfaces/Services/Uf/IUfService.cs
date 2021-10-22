@@ -1,9 +1,9 @@
-﻿using Domain.Dtos.Uf;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Api.Domain.Dtos.Uf;
 
-namespace Domain.Interfaces.Services.Uf
+namespace Api.Domain.Interfaces.Services.Uf
 {
     public interface IUfService
     {

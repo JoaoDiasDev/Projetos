@@ -1,12 +1,14 @@
-﻿using System;
+using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Dtos.Cep
+namespace Api.Domain.Dtos.Cep
 {
     public class CepDtoUpdate
     {
-        [Required(ErrorMessage = "Id é campo obrigatório")]
+
+        [Required(ErrorMessage = "Id é campo Obrigatorio")]
         public Guid Id { get; set; }
+
         [Required(ErrorMessage = "CEP é campo obrigatório")]
         public string Cep { get; set; }
 
@@ -15,7 +17,8 @@ namespace Domain.Dtos.Cep
 
         public string Numero { get; set; }
 
-        [Required(ErrorMessage = "Município é campo obrigatório")]
+        [Required(ErrorMessage = "Municipio é campo obrigatório")]
         public Guid MunicipioId { get; set; }
+
     }
 }

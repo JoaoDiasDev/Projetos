@@ -1,8 +1,8 @@
-﻿using Api.Domain.Interfaces;
-using Domain.Entities;
 using System.Threading.Tasks;
+using Api.Domain.Entities;
+using Api.Domain.Interfaces;
 
-namespace Domain.Repository
+namespace Api.Domain.Repository
 {
     public interface ICepRepository : IRepository<CepEntity>
     {

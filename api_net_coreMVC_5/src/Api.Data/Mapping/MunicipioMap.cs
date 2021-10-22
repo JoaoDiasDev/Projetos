@@ -1,8 +1,8 @@
-﻿using Domain.Entities;
+using Api.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Data.Mapping
+namespace Api.Data.Mapping
 {
     public class MunicipioMap : IEntityTypeConfiguration<MunicipioEntity>
     {
@@ -10,11 +10,13 @@ namespace Data.Mapping
         {
             builder.ToTable("Municipio");
 
-            builder.HasKey(m => m.Id);
+            builder.HasKey(u => u.Id);
 
-            builder.HasIndex(m => m.CodIBGE);
+            builder.HasIndex(u => u.CodIBGE);
 
-            builder.HasOne(m => m.Uf).WithMany(m => m.Municipios);
+            builder.HasOne(u => u.Uf)
+                   .WithMany(m => m.Municipios);
+
         }
     }
 }

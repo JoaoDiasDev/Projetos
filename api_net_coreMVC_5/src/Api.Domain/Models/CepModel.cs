@@ -1,11 +1,10 @@
-﻿using System;
+using System;
 
-namespace Domain.Models
+namespace Api.Domain.Models
 {
     public class CepModel : BaseModel
     {
         private string _cep;
-
         public string Cep
         {
             get { return _cep; }
@@ -13,7 +12,6 @@ namespace Domain.Models
         }
 
         private string _logradouro;
-
         public string Logradouro
         {
             get { return _logradouro; }
@@ -21,15 +19,16 @@ namespace Domain.Models
         }
 
         private string _numero;
-
         public string Numero
         {
             get { return _numero; }
-            set { _numero = string.IsNullOrEmpty(value) ? "S/N" : value; }
+            set
+            {
+                _numero = string.IsNullOrEmpty(value) ? "S/N" : value;
+            }
         }
 
         private Guid _municipioId;
-
         public Guid MunicipioId
         {
             get { return _municipioId; }

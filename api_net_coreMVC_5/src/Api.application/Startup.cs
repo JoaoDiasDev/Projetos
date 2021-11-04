@@ -95,18 +95,18 @@ namespace application
                 {
                     Version = "v1",
                     Title = "Curso de API com .NETCore3.1/.NET5.0 - Na Prática",
-                    Description = "Arquitetura DDD - Atualizado em 16/02/2021",
+                    Description = "Arquitetura DDD - Atualizado em 16/10/2021",
                     TermsOfService = new Uri("http://www.mfrinfo.com.br"),
                     Contact = new OpenApiContact
                     {
-                        Name = "Marcos Fabricio Rosa",
-                        Email = "mfr@mail.com",
-                        Url = new Uri("http://www.mfrinfo.com.br")
+                        Name = "João Dias",
+                        Email = "joaodiasworking@gmail.com",
+                        Url = new Uri("http://github.com/joaodiasdev")
                     },
                     License = new OpenApiLicense
                     {
                         Name = "Termo de Licença de Uso",
-                        Url = new Uri("http://www.mfrinfo.com.br")
+                        Url = new Uri("http://github.com/joaodiasdev")
                     }
                 });
 

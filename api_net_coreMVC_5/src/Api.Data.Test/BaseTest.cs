@@ -23,7 +23,7 @@ namespace Api.Data.Test
         {
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddDbContext<MyContext>(o =>
-                o.UseMySql($"Persist Security Info=True;Server=localhost;Database={dataBaseName};User=developer;Password=123456",
+                o.UseMySql($"Persist Security Info=True;Server=localhost;Database={dataBaseName};User=sa;Password=Matheus321*",
                     new MySqlServerVersion(new Version(8, 0, 21)),
                         mySqlOptions => mySqlOptions
                             .CharSetBehavior(CharSetBehavior.NeverAppend)),

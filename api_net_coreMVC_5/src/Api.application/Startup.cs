@@ -33,7 +33,7 @@ namespace application
         {
             if (_environment.IsEnvironment("Testing"))
             {
-                Environment.SetEnvironmentVariable("DB_CONNECTION", "Persist Security Info=True;Server=localhost;Port=3306;DataBase=dbAPI_Integration;Uid=developer;Pwd=123456");
+                Environment.SetEnvironmentVariable("DB_CONNECTION", "Persist Security Info=True;Server=localhost;Port=3306;DataBase=dbAPI_Integration;Uid=sa;Pwd=Matheus321*");
                 Environment.SetEnvironmentVariable("DATABASE", "MYSQL");
                 Environment.SetEnvironmentVariable("MIGRATION", "APLICAR");
                 Environment.SetEnvironmentVariable("Audience", "ExemploAudience");
@@ -96,7 +96,7 @@ namespace application
                     Version = "v1",
                     Title = "Curso de API com .NETCore3.1/.NET5.0 - Na Prática",
                     Description = "Arquitetura DDD - Atualizado em 16/10/2021",
-                    TermsOfService = new Uri("http://www.mfrinfo.com.br"),
+                    TermsOfService = new Uri("http://github.com/joaodiasdev"),
                     Contact = new OpenApiContact
                     {
                         Name = "João Dias",

@@ -22,12 +22,6 @@ namespace CleanArchMvc.Application.Interfaces
         Task<ProductDTO> GetById(int? id);
 
         /// <summary>
-        /// Gets the product category.
-        /// </summary>
-        /// <param name="id">The id.</param>
-        /// <returns>A Task.</returns>
-        Task<ProductDTO> GetProductCategory(int? id);
-        /// <summary>
         /// Adds the.
         /// </summary>
         /// <param name="productDto">The product dto.</param>

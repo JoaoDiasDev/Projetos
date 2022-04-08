@@ -1,5 +1,9 @@
-﻿using CleanArchMvc.Application.Interfaces;
+﻿using CleanArchMvc.Application.DTOs;
+using CleanArchMvc.Application.Interfaces;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace CleanArchMvc.WebUI.Controllers
@@ -10,24 +14,147 @@ namespace CleanArchMvc.WebUI.Controllers
     public class ProductsController : Controller
     {
         private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
+        private readonly IWebHostEnvironment _environment;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ProductsController"/> class.
         /// </summary>
-        /// <param name="productService">The product service.</param>
-        public ProductsController(IProductService productService)
+        /// <param name="productAppService">The product app service.</param>
+        /// <param name="categoryService">The category service.</param>
+        /// <param name="environment">The environment.</param>
+        public ProductsController(IProductService productAppService,
+            ICategoryService categoryService, IWebHostEnvironment environment)
         {
-            _productService = productService;
+            _productService = productAppService;
+            _categoryService = categoryService;
+            _environment = environment;
+
 
         }
+
         /// <summary>
         /// Indices the.
         /// </summary>
-        /// <returns>An IActionResult.</returns>
+        /// <returns>A Task.</returns>
         [HttpGet]
         public async Task<IActionResult> Index()
         {
             var products = await _productService.GetProducts();
             return View(products);
+        }
+
+        /// <summary>
+        /// Creates the.
+        /// </summary>
+        /// <returns>A Task.</returns>
+        [HttpGet()]
+        public async Task<IActionResult> Create()
+        {
+            ViewBag.CategoryId =
+            new SelectList(await _categoryService.GetCategories(), "Id", "Name");
+
+            return View();
+        }
+
+        /// <summary>
+        /// Creates the.
+        /// </summary>
+        /// <param name="productDto">The product dto.</param>
+        /// <returns>A Task.</returns>
+        [HttpPost]
+        public async Task<IActionResult> Create(ProductDTO productDto)
+        {
+            if (ModelState.IsValid)
+            {
+                await _productService.Add(productDto);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(productDto);
+        }
+
+        /// <summary>
+        /// Edits the.
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <returns>A Task.</returns>
+        [HttpGet()]
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null) return NotFound();
+            var productDto = await _productService.GetById(id);
+
+            if (productDto == null) return NotFound();
+
+            var categories = await _categoryService.GetCategories();
+            ViewBag.CategoryId = new SelectList(categories, "Id", "Name", productDto.CategoryId);
+
+            return View(productDto);
+        }
+
+        /// <summary>
+        /// Edits the.
+        /// </summary>
+        /// <param name="productDto">The product dto.</param>
+        /// <returns>A Task.</returns>
+        [HttpPost()]
+        public async Task<IActionResult> Edit(ProductDTO productDto)
+        {
+            if (ModelState.IsValid)
+            {
+                await _productService.Update(productDto);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(productDto);
+        }
+
+        /// <summary>
+        /// Deletes the.
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <returns>A Task.</returns>
+        [HttpGet()]
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+                return NotFound();
+
+            var productDto = await _productService.GetById(id);
+
+            if (productDto == null) return NotFound();
+
+            return View(productDto);
+        }
+
+        /// <summary>
+        /// Deletes the confirmed.
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <returns>A Task.</returns>
+        [HttpPost(), ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            await _productService.Remove(id);
+            return RedirectToAction("Index");
+        }
+
+        /// <summary>
+        /// Details the.
+        /// </summary>
+        /// <param name="id">The id.</param>
+        /// <returns>A Task.</returns>
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null) return NotFound();
+            var productDto = await _productService.GetById(id);
+
+            if (productDto == null) return NotFound();
+            var wwwroot = _environment.WebRootPath;
+            var image = Path.Combine(wwwroot, "images\\" + productDto.Image);
+            var exists = System.IO.File.Exists(image);
+            ViewBag.ImageExist = exists;
+
+            return View(productDto);
         }
     }
 }

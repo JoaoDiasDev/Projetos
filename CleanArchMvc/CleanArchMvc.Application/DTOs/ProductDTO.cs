@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 namespace CleanArchMvc.Application.DTOs
 {
@@ -61,6 +62,7 @@ namespace CleanArchMvc.Application.DTOs
         /// <summary>
         /// Gets or sets the category.
         /// </summary>
+        [JsonIgnore]
         public Category Category { get; set; }
 
         /// <summary>

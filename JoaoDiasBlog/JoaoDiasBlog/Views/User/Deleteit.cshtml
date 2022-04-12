@@ -1,0 +1,22 @@
+﻿<div class="container">
+
+    <div class="row">
+        @if (ViewBag.error != null && ViewBag.error != "")
+        {
+            <div class="alert alert-danger">
+                <div>@ViewBag.error</div>
+            </div>
+        }
+        @if (ViewBag.success != null && ViewBag.success !="")
+        {
+            <div class="alert alert-success">
+                <div>
+                    @ViewBag.success
+                    <br />
+                    <a asp-controller="User" asp-action="Index" class="btn btn-info">Go to admin panel</a>
+                </div>
+            </div>
+        }
+    </div>
+
+</div>

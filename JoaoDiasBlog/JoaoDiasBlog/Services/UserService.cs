@@ -6,14 +6,14 @@ namespace JoaoDiasBlog.Services
 {
     public class UserService
     {
-        private SqlConnection myConnection;
-        SqlCommand? myCommand;
+        private readonly SqlConnection _myConnection;
+        private SqlCommand? _myCommand;
 
 
         public UserService(IConfiguration configuration)
         {
             ConnectionService connectionService = new ConnectionService(configuration);
-            myConnection = connectionService.DbConnection();
+            _myConnection = connectionService.DbConnection();
         }
 
 
@@ -21,12 +21,12 @@ namespace JoaoDiasBlog.Services
         {
             User myUser = new User();
             string mySqlQuery = "select * from [user] where UserId = @id";
-            myCommand = new SqlCommand();
-            myCommand.CommandText = mySqlQuery;
-            myCommand.Connection = myConnection;
-            myCommand.CommandType = CommandType.Text;
-            myCommand.Parameters.AddWithValue("@id", id);
-            IDataReader dataReader = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+            _myCommand = new SqlCommand();
+            _myCommand.CommandText = mySqlQuery;
+            _myCommand.Connection = _myConnection;
+            _myCommand.CommandType = CommandType.Text;
+            _myCommand.Parameters.AddWithValue("@id", id);
+            IDataReader dataReader = _myCommand.ExecuteReader(CommandBehavior.CloseConnection);
             while (dataReader.Read())
             {
                 myUser.UserId = dataReader["UserId"] is DBNull ? 0 : int.Parse(dataReader["UserId"].ToString() ?? string.Empty);
@@ -45,9 +45,9 @@ namespace JoaoDiasBlog.Services
             List<User> users = new List<User>();
 
             string mySqlQuery = "select * from [User]";
-            myCommand = new SqlCommand(mySqlQuery, myConnection);
-            myCommand.CommandType = CommandType.Text;
-            IDataReader dataReader = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+            _myCommand = new SqlCommand(mySqlQuery, _myConnection);
+            _myCommand.CommandType = CommandType.Text;
+            IDataReader dataReader = _myCommand.ExecuteReader(CommandBehavior.CloseConnection);
             while (dataReader.Read())
             {
                 User myUser = new User();
@@ -69,10 +69,10 @@ namespace JoaoDiasBlog.Services
         {
             User myUser = new User();
             string mySqlQuery = "select * from [User] where Username = @username and Password = @password";
-            myCommand = new SqlCommand(mySqlQuery, myConnection);
-            myCommand.Parameters.AddWithValue("@username", username);
-            myCommand.Parameters.AddWithValue("@password", password);
-            IDataReader dataReader = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
+            _myCommand = new SqlCommand(mySqlQuery, _myConnection);
+            _myCommand.Parameters.AddWithValue("@username", username);
+            _myCommand.Parameters.AddWithValue("@password", password);
+            IDataReader dataReader = _myCommand.ExecuteReader(CommandBehavior.CloseConnection);
 
             while (dataReader.Read())
             {

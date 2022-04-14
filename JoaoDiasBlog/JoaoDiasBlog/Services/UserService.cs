@@ -1,19 +1,14 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
+﻿using JoaoDiasBlog.Entities;
 using System.Data;
 using System.Data.SqlClient;
-using JoaoDiasBlog.Entities;
-using JoaoDiasBlog.Services;
 
 namespace JoaoDiasBlog.Services
 {
     public class UserService
     {
         private SqlConnection myConnection;
-        SqlCommand myCommand;
-       
+        SqlCommand? myCommand;
+
 
         public UserService(IConfiguration configuration)
         {
@@ -34,7 +29,7 @@ namespace JoaoDiasBlog.Services
             IDataReader dataReader = myCommand.ExecuteReader(CommandBehavior.CloseConnection);
             while (dataReader.Read())
             {
-                myUser.UserId = dataReader["UserId"] is DBNull ? 0 : int.Parse(dataReader["UserId"].ToString());
+                myUser.UserId = dataReader["UserId"] is DBNull ? 0 : int.Parse(dataReader["UserId"].ToString() ?? string.Empty);
                 myUser.UserName = dataReader["Username"] is DBNull ? string.Empty : dataReader["Username"].ToString();
                 myUser.Password = dataReader["Password"] is DBNull ? string.Empty : dataReader["Password"].ToString();
             }
@@ -56,7 +51,7 @@ namespace JoaoDiasBlog.Services
             while (dataReader.Read())
             {
                 User myUser = new User();
-                myUser.UserId = dataReader["UserId"] is DBNull ? 0 : int.Parse(dataReader["UserId"].ToString());
+                myUser.UserId = dataReader["UserId"] is DBNull ? 0 : int.Parse(dataReader["UserId"].ToString() ?? string.Empty);
                 myUser.UserName = dataReader["Username"] is DBNull ? string.Empty : dataReader["Username"].ToString();
                 myUser.Password = dataReader["Password"] is DBNull ? string.Empty : dataReader["Password"].ToString();
                 users.Add(myUser);
@@ -69,8 +64,8 @@ namespace JoaoDiasBlog.Services
         {
             return Login(user.UserName, user.Password);
         }
-        
-        public User Login(string username, string password)
+
+        public User Login(string? username, string? password)
         {
             User myUser = new User();
             string mySqlQuery = "select * from [User] where Username = @username and Password = @password";
@@ -81,11 +76,11 @@ namespace JoaoDiasBlog.Services
 
             while (dataReader.Read())
             {
-                
-                myUser.UserId = dataReader["UserId"] is DBNull ? 0 : int.Parse(dataReader["UserId"].ToString());
+
+                myUser.UserId = dataReader["UserId"] is DBNull ? 0 : int.Parse(dataReader["UserId"].ToString() ?? string.Empty);
                 myUser.UserName = dataReader["Username"] is DBNull ? string.Empty : dataReader["Username"].ToString();
                 myUser.Password = dataReader["Password"] is DBNull ? string.Empty : dataReader["Password"].ToString();
-                
+
             }
             return myUser;
         }

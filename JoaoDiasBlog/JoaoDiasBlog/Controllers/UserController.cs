@@ -1,11 +1,7 @@
 ﻿using JoaoDiasBlog.Entities;
 using JoaoDiasBlog.Models;
 using JoaoDiasBlog.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 
 namespace JoaoDiasBlog.Controllers
 {
@@ -22,8 +18,8 @@ namespace JoaoDiasBlog.Controllers
 
         public IActionResult Index()
         {
-            string cookieUsername = HttpContext.Request.Cookies["username"];
-            string cookieUserId = HttpContext.Request.Cookies["userid"];
+            string? cookieUsername = HttpContext.Request.Cookies["username"];
+            string? cookieUserId = HttpContext.Request.Cookies["userid"];
 
             if (cookieUserId == "" || cookieUserId == null || cookieUsername == "" || cookieUsername == null)
             {
@@ -74,7 +70,7 @@ namespace JoaoDiasBlog.Controllers
                 {
                     Expires = DateTime.Now.AddDays(5)
                 };
-                Response.Cookies.Append("username", myUser.UserName, username);
+                if (myUser.UserName != null) Response.Cookies.Append("username", myUser.UserName, username);
                 return RedirectToAction("Index");
             }
 
@@ -108,7 +104,7 @@ namespace JoaoDiasBlog.Controllers
         {
             post.Publishing_Date = DateTime.Now;
             post.Modified_Date = DateTime.Now;
-            post.UserId = int.Parse(HttpContext.Request.Cookies["userid"].ToString());
+            post.UserId = int.Parse(HttpContext.Request.Cookies["userid"] ?? string.Empty);
             bool success = postService.Create(post);
 
             if (success)
